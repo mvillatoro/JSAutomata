@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title id="AutomataId">DFA</title>
+    <meta name="description" content="A finite state machine chart with editable and interactive features." />
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+    <div id="myDiagramDiv" style="border: solid 2px black; width:100%; height: 400px" align="center" onclick="createState()"  ></div>
+
+    <button id="SaveButton" onclick="save('automata.json',  myDiagram.model.toJson())">Save</button>
+
+    <button onclick="load(event)">Load</button>
+
+    <button onclick="acceptsString(document.getElementById('testString').value)">Test String</button>
+
+    <input id="testString" type="text"><br>
+
+    <input id="jsonFile" type="file"><br>
+
+    <input id="initial" type="checkbox" value="initial">Initial<br>
+
+    <input  id="final" type="checkbox" value="final">Final<br>
+
+    <input  id="normal" type="checkbox" value="normal">Normal<br>
+
+
+</body>
+
+<script src="go.js"></script>
+<script src="State.js"></script>
+<script src="Transition.js"></script>
+<script src="Automata.js"></script>
+<script src="DrawAutomata.js"></script>
+
+</html>
