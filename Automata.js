@@ -18,6 +18,17 @@ function transitionFunction(initialState, testString) {
     return lastState.stateType == "F" || lastState.stateType == "IF";
 }
 
+function getState(stateName) {
+    var state;
+    for(state in states) {
+        if(state.stateName == stateName){
+            return state;
+        }
+    }
+
+    return null;
+}
+
 function extendedFunctionTransition(state, testChar) {
     var nextState = state.getNextState(testChar);
     return nextState[0];

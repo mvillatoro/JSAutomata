@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce18f935-c04e-41c7-bc11-217d162febb7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/mvill.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Automata.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DrawAutomata.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MainPage.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/State.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Transition.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestPage.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Automata.js" afterPath="$PROJECT_DIR$/Automata.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DrawAutomata.js" afterPath="$PROJECT_DIR$/DrawAutomata.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MainPage.html" afterPath="$PROJECT_DIR$/MainPage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/State.js" afterPath="$PROJECT_DIR$/State.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,8 +26,8 @@
       <file leaf-file-name="MainPage.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MainPage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="26" column="65" lean-forward="true" selection-start-line="26" selection-start-column="65" selection-end-line="26" selection-end-column="65" />
+            <state relative-caret-position="340">
+              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding>
                 <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -43,9 +39,10 @@
       <file leaf-file-name="DrawAutomata.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DrawAutomata.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state relative-caret-position="425">
+              <caret line="25" column="49" lean-forward="false" selection-start-line="25" selection-start-column="49" selection-end-line="25" selection-end-column="49" />
               <folding>
+                <element signature="n#!!block;n#drawState#0" expanded="false" />
                 <element signature="n#!!block;n#load#0" expanded="false" />
                 <element signature="n#!!block;n#save#0" expanded="false" />
               </folding>
@@ -68,8 +65,8 @@
       <file leaf-file-name="State.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/State.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="2" column="3" lean-forward="true" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+            <state relative-caret-position="136">
+              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding>
                 <element signature="e#0#41#0" expanded="false" />
               </folding>
@@ -80,8 +77,8 @@
       <file leaf-file-name="Automata.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Automata.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="31" column="21" lean-forward="false" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+            <state relative-caret-position="697">
+              <caret line="43" column="22" lean-forward="true" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
               <folding>
                 <element signature="e#0#41#0" expanded="false" />
               </folding>
@@ -120,10 +117,10 @@
         <option value="$PROJECT_DIR$/go.js" />
         <option value="$PROJECT_DIR$/TestPage.html" />
         <option value="$PROJECT_DIR$/DFA.js" />
-        <option value="$PROJECT_DIR$/MainPage.html" />
         <option value="$PROJECT_DIR$/Transition.js" />
         <option value="$PROJECT_DIR$/Automata.js" />
         <option value="$PROJECT_DIR$/State.js" />
+        <option value="$PROJECT_DIR$/MainPage.html" />
         <option value="$PROJECT_DIR$/DrawAutomata.js" />
       </list>
     </option>
@@ -283,12 +280,12 @@
       <workItem from="1485265920139" duration="15565000" />
       <workItem from="1485401360558" duration="9051000" />
       <workItem from="1485490214380" duration="18585000" />
-      <workItem from="1485729085587" duration="12006000" />
+      <workItem from="1485729085587" duration="14696000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55965000" />
+    <option name="totallyTimeSpent" value="58655000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -403,13 +400,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/numberCalculator.js" />
-    <entry file="file://$PROJECT_DIR$/MainPage.html">
+    <entry file="file://$PROJECT_DIR$/State.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="26" column="65" lean-forward="true" selection-start-line="26" selection-start-column="65" selection-end-line="26" selection-end-column="65" />
+        <state relative-caret-position="136">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
-            <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -424,20 +420,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/State.js">
+    <entry file="file://$PROJECT_DIR$/MainPage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="2" column="3" lean-forward="true" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+        <state relative-caret-position="340">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
-            <element signature="e#0#41#0" expanded="false" />
+            <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Automata.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="31" column="21" lean-forward="false" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+        <state relative-caret-position="697">
+          <caret line="43" column="22" lean-forward="true" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
           <folding>
             <element signature="e#0#41#0" expanded="false" />
           </folding>
@@ -446,9 +443,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DrawAutomata.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        <state relative-caret-position="425">
+          <caret line="25" column="49" lean-forward="false" selection-start-line="25" selection-start-column="49" selection-end-line="25" selection-end-column="49" />
           <folding>
+            <element signature="n#!!block;n#drawState#0" expanded="false" />
             <element signature="n#!!block;n#load#0" expanded="false" />
             <element signature="n#!!block;n#save#0" expanded="false" />
           </folding>

@@ -12,11 +12,19 @@
 
     <button id="SaveButton" onclick="save('automata.json',  myDiagram.model.toJson())">Save</button>
 
-    <button onclick="load(event)">Load</button>
+    <button onclick="load(event)">Load</button><br>
 
-    <button onclick="acceptsString(document.getElementById('testString').value)">Test String</button>
+    <input id="automataName" type="text">
 
-    <input id="testString" type="text"><br>
+    <button onclick="createNewState(document.getElementById('automataName').value)">Create State</button><br>
+
+    <input id="transitionData" type="text">
+
+    <button onclick="createNewTransition(document.getElementById('transitionData').value)">Create Transition</button><br>
+
+    <input id="testString" type="text">
+
+    <button onclick="acceptsString(document.getElementById('testString').value)">Test String</button><br>
 
     <input id="jsonFile" type="file"><br>
 

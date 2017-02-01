@@ -4,31 +4,37 @@
 
     var automata;
 
-function createState() {
+function createNewState(stateName) {
     var initial = document.getElementById("initial").checked;
     var final = document.getElementById("final").checked;
-    var stateName = "state";
-    var color = "white";
+    var normal = document.getElementById("normal").checked;
 
     if(initial && final){
-        alert("initial and final");
         automata.createState(stateName,"IF");
+        alert("state name: " + stateName + "-IF")
     }
     else if(final){
         automata.createState(stateName,"F");
-        drawState(color);
+        alert("state name: " + stateName + "-IF")
     }
     else if(initial){
         automata.createState(stateName,"I");
-        drawState(color);
+        alert("state name: " + stateName + "-IF")
     }
-    else if(document.getElementById("normal").checked){
+    else if(normal){
         automata.createState(stateName,"N");
-        drawState(color);
+        alert("state name: " + stateName + "-IF")
     }
 }
 
+function createNewTransition(transitionData) {
+    var dataArray = transitionData.split(",");
 
+    var originState = automata.getState(dataArray[1]);
+    var nextState = automata.getState(dataArray[2]);
+
+    automata.createTransition(dataArray[0, originState, nextState])
+}
 
 function acceptsString(testString) {
     var accept = transitionFunction(automata.states[0], testString);

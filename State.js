@@ -11,8 +11,12 @@ function State(stateName, stateType) {
 
 function getNextState(transitionChar) {
     var transition;
+    var states = [];
+    for (transition in transitions){
+        if(transition.transitionChar == transitionChar){
+            states.push(transition.nextState);
+        }
+    }
 
-    for (transition in transitions)
-        if(transition.transitionChar)
-            transition.push(transition.nextState);
+    return states;
 }
