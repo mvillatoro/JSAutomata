@@ -4,11 +4,6 @@
 
 var transitions;
 
-function State(stateName, stateType) {
-    this.stateName = stateName;
-    this.stateType = stateType;
-}
-
 function getNextState(transitionChar) {
     var transition;
     var states = [];

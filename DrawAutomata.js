@@ -2,7 +2,25 @@
  * Created by mvill on 1/27/2017.
  */
 
-    var automata;
+var states = [10];
+var transitions = [10];
+
+//region Objects
+
+function State(name, type) {
+    this.stateName = name;
+    this.stateType = type;
+}
+
+function Transition(transitionChar, originState, nextState) {
+    this.transitionChar = transitionChar;
+    this.originState = originState;
+    this.nextState = nextState;
+}
+
+//endregion
+
+//region Create functions
 
 function createNewState(stateName) {
     var initial = document.getElementById("initial").checked;
@@ -10,34 +28,112 @@ function createNewState(stateName) {
     var normal = document.getElementById("normal").checked;
 
     if(initial && final){
-        automata.createState(stateName,"IF");
-        alert("state name: " + stateName + "-IF")
+        createState(stateName,"IF");
     }
     else if(final){
-        automata.createState(stateName,"F");
-        alert("state name: " + stateName + "-IF")
+        createState(stateName,"F");
     }
     else if(initial){
-        automata.createState(stateName,"I");
-        alert("state name: " + stateName + "-IF")
+        createState(stateName,"I");
     }
     else if(normal){
-        automata.createState(stateName,"N");
-        alert("state name: " + stateName + "-IF")
+        createState(stateName,"N");
     }
+}
+
+function createState(stateName, stateType) {
+    var newState = new State(stateName, stateType);
+    var text = "State " + stateName + " created";
+
+    if(!stateExist(stateName)){
+        states.push(newState);
+        callSnackbar(text);
+    }else
+        callSnackbar("State " + stateName + " already exists...");
 }
 
 function createNewTransition(transitionData) {
+
     var dataArray = transitionData.split(",");
+    var originState = getState(dataArray[1]);
 
-    var originState = automata.getState(dataArray[1]);
-    var nextState = automata.getState(dataArray[2]);
+    var nextState = getState(dataArray[2]);
 
-    automata.createTransition(dataArray[0, originState, nextState])
+    createTransition(dataArray[0], originState, nextState)
+
+}
+
+function createTransition(transitionChar, originState, nextState)   {
+    if(originState != null &&  nextState != null){
+        if(stateExist(originState.stateName) && stateExist(nextState.stateName)){
+            var transition = new Transition(transitionChar, originState, nextState);
+            transitions.push(transition);
+            callSnackbar("Char: " + transitionChar + " Origin: " + originState.stateName + " Next: " + nextState.stateName);
+        }
+    }else{
+        callSnackbar("Invalid input");
+    }
+}
+
+//endregion
+
+
+
+function transitionFunction(initialState, testString) {
+    var testChar = testString.charAt(0);
+    var lastState;
+
+    if (testString.length > 1) {
+        var newTestString =  testString.slice(1,testString.length);
+        lastState = extendedFunctionTransition(transitionFunction(initialState, newTestString), testChar);
+    }else
+    {
+        lastState =extendedFunctionTransition(initialState, testChar);
+    }
+
+    if(lastState != null)
+        return lastState.stateType == "F" || lastState.stateType == "IF";
+    else
+        return false;
+}
+
+function extendedFunctionTransition(state, testChar) {
+    var nextState = getNextState(state, testChar);
+
+    console.log(nextState);
+
+    if(nextState!= null)
+        return nextState[1];
+    else
+        return null;
+}
+
+
+
+
+function getState(stateName) {
+    for(var i = 1; i < states.length; i++)
+        if(states[i].stateName == stateName)
+            return states[i];
+}
+
+function getNextState(state, transitionChar) {
+    var nextStates = [];
+
+    for(var i = 1; i< transitions.length; i++){
+         if(transitions[i].originState.stateName == state.stateName && transitions[i].transitionChar == transitionChar){
+             if(transitions[i].nextState != null)
+                nextStates.push(transitions[i].nextState);
+         }
+    }
+
+    console.log(nextStates);
+
+    return nextStates;
 }
 
 function acceptsString(testString) {
-    var accept = transitionFunction(automata.states[0], testString);
+    var accept = transitionFunction(states[1], testString);
 
     if(accept)
         alert("String was accepted :D");
@@ -45,6 +141,8 @@ function acceptsString(testString) {
         alert("The string was NOT accepted :(")
 }
 
+
+/*
 function drawState(color) {
     var $ = go.GraphObject.make;
 
@@ -117,6 +215,14 @@ function drawState(color) {
                 )
             );
 }
+*/
+
+function callSnackbar(displayText) {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    document.getElementById("snackbar").innerHTML = displayText;
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
 
 function load(evt) {
     //myDiagram.model = go.Model.fromJson(document.getElementById("jsonFile").value);
@@ -134,3 +240,22 @@ function save(filename, text) {
 
     document.body.removeChild(element);
 }
+
+
+function stateExist(stateName) {
+    for(var i = 1; i < states.length; i++)
+        if(states[i].stateName == stateName)
+            return true;
+
+    return false;
+}
+
+
+function printStates() {
+
+    for (var i = 1; i < states.length; i++) {
+        console.log(states[i].stateName);
+        console.log(states[i].stateType);
+    }
+}
+

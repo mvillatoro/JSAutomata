@@ -1,6 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+    <style>
+        #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
+
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
+
+
     <title id="AutomataId">DFA</title>
     <meta name="description" content="A finite state machine chart with editable and interactive features." />
     <meta charset="UTF-8">
@@ -10,7 +56,7 @@
 <body>
     <div id="myDiagramDiv" style="border: solid 2px black; width:100%; height: 400px" align="center" onclick="createState()"  ></div>
 
-    <button id="SaveButton" onclick="save('automata.json',  myDiagram.model.toJson())">Save</button>
+    <!--<button id="SaveButton" onclick="save('automata.json',  myDiagram.model.toJson())">Save</button>-->
 
     <button onclick="load(event)">Load</button><br>
 
@@ -34,13 +80,14 @@
 
     <input  id="normal" type="checkbox" value="normal">Normal<br>
 
+    <div id="snackbar"  >State created</div>
+
+<button onclick="printStates()">Print</button>
+
 
 </body>
 
 <script src="go.js"></script>
-<script src="State.js"></script>
-<script src="Transition.js"></script>
-<script src="Automata.js"></script>
 <script src="DrawAutomata.js"></script>
 
 </html>
