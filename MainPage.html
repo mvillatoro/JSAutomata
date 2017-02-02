@@ -44,46 +44,41 @@
             from {bottom: 30px; opacity: 1;}
             to {bottom: 0; opacity: 0;}
         }
-    </style>
-
-
-    <title id="AutomataId">DFA</title>
+    </style> <!--snack bar-->
+    <script type="text/javascript" src="src/vis.js"></script>
+    <link href="src/vis-network.min.css" rel="stylesheet" type="text/css" />
+    <title id="AutomataId">Teoria de la Computacion</title>
     <meta name="description" content="A finite state machine chart with editable and interactive features." />
     <meta charset="UTF-8">
 
 </head>
 
 <body>
-    <div id="myDiagramDiv" style="border: solid 2px black; width:100%; height: 400px" align="center" onclick="createState()"  ></div>
+    <div id="myDiagramDiv" style="border: solid 2px black; width:100%; height: 400px" align="center"   ></div>
 
     <!--<button id="SaveButton" onclick="save('automata.json',  myDiagram.model.toJson())">Save</button>-->
 
     <button onclick="load(event)">Load</button><br>
 
-    <input id="automataName" type="text">
-
-    <button onclick="createNewState(document.getElementById('automataName').value)">Create State</button><br>
-
-    <input id="transitionData" type="text">
-
-    <button onclick="createNewTransition(document.getElementById('transitionData').value)">Create Transition</button><br>
+    <button onclick="createNewTransition()">Create Transition</button><br>
 
     <input id="testString" type="text">
 
     <button onclick="acceptsString(document.getElementById('testString').value)">Test String</button><br>
 
+    <button id = "initial"  onclick="createNewState('I')">Initial</button>
+
+    <button id = "normal" onclick="createNewState('N')">Normal</button>
+
+    <button id = "final" onclick="createNewState('F')">Final</button>
+
     <input id="jsonFile" type="file"><br>
-
-    <input id="initial" type="checkbox" value="initial">Initial<br>
-
-    <input  id="final" type="checkbox" value="final">Final<br>
-
-    <input  id="normal" type="checkbox" value="normal">Normal<br>
 
     <div id="snackbar"  >State created</div>
 
-<button onclick="printStates()">Print</button>
+    <button onclick="printStates()">Print States</button>
 
+    <button onclick="printTransitions()">Print Transitions</button>
 
 </body>
 

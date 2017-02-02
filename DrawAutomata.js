@@ -5,11 +5,19 @@
 var states = [10];
 var transitions = [10];
 
+var nodeIds, shadowState, nodes, edges, network;
+
+nodeIds = [];
+edges = [];
+shadowState = true;
+nodes = new vis.DataSet();
+
 //region Objects
 
-function State(name, type) {
+function State(name, type, stateId) {
     this.stateName = name;
     this.stateType = type;
+    this.stateId = stateId;
 }
 
 function Transition(transitionChar, originState, nextState) {
@@ -22,45 +30,45 @@ function Transition(transitionChar, originState, nextState) {
 
 //region Create functions
 
-function createNewState(stateName) {
-    var initial = document.getElementById("initial").checked;
-    var final = document.getElementById("final").checked;
-    var normal = document.getElementById("normal").checked;
+function createNewState(stateType) {
 
-    if(initial && final){
-        createState(stateName,"IF");
-    }
-    else if(final){
-        createState(stateName,"F");
-    }
-    else if(initial){
-        createState(stateName,"I");
-    }
-    else if(normal){
-        createState(stateName,"N");
+    var stateName = prompt("State name", "State");
+
+    if(stateName != null){
+        if(stateType == "IF")
+            createState(stateName,"IF", "#00ff99"); //INITIAL FINAL
+        else if(stateType == "F")
+            createState(stateName,"F", "#00ff99"); //FINAL
+        else if(stateType == "I")
+            createState(stateName,"I", "#66a3ff"); //INITIAL
+        else if(stateType == "N")
+            createState(stateName,"N", "#808080"); //NORMAL
     }
 }
 
-function createState(stateName, stateType) {
+function createState(stateName, stateType, colorType) {
     var newState = new State(stateName, stateType);
     var text = "State " + stateName + " created";
 
     if(!stateExist(stateName)){
         states.push(newState);
+        var stateId = (Math.random() * 1e7).toString(32);
+        console.log("ID: " + stateId);
+        addNode(stateId,stateName, colorType);
         callSnackbar(text);
     }else
         callSnackbar("State " + stateName + " already exists...");
 }
 
-function createNewTransition(transitionData) {
+function createNewTransition() {
+
+    var transitionData = prompt("Transition", "0,a,b");
 
     var dataArray = transitionData.split(",");
     var originState = getState(dataArray[1]);
-
     var nextState = getState(dataArray[2]);
 
     createTransition(dataArray[0], originState, nextState)
-
 }
 
 function createTransition(transitionChar, originState, nextState)   {
@@ -68,6 +76,7 @@ function createTransition(transitionChar, originState, nextState)   {
         if(stateExist(originState.stateName) && stateExist(nextState.stateName)){
             var transition = new Transition(transitionChar, originState, nextState);
             transitions.push(transition);
+            createEdge(transitionChar, originState, nextState);
             callSnackbar("Char: " + transitionChar + " Origin: " + originState.stateName + " Next: " + nextState.stateName);
         }
     }else{
@@ -75,8 +84,40 @@ function createTransition(transitionChar, originState, nextState)   {
     }
 }
 
+function addNode(stateId, stateName, color) {
+    console.log("ID: " + stateId);
+    nodes.add({id:stateId, label:stateName, color: {background:color, border:'black'}});
+    nodeIds.push(stateId);
+    init();
+}
+
+function createEdge(transitionChar, originState, nextState) {
+    //var edge = {from: originState.stateId, to: nextState.stateId, label: transitionChar, font: {align: 'horizontal'}};
+    //edges = new vis.DataSet(edge);
+    //init();
+    var transitionId = (Math.random() * 1e7).toString(32);
+    edges.push({
+        id: transitionId,
+        from: originState.stateId,
+        to: nextState.stateId,
+        label: transitionChar
+    });
+
+    init();
+}
+
 //endregion
 
+
+function init() {
+    var container = document.getElementById('myDiagramDiv');
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+    var options = {};
+    network = new vis.Network(container, data, options);
+}
 
 
 function transitionFunction(initialState, testString) {
@@ -91,131 +132,58 @@ function transitionFunction(initialState, testString) {
         lastState =extendedFunctionTransition(initialState, testChar);
     }
 
-    if(lastState != null)
-        return lastState.stateType == "F" || lastState.stateType == "IF";
-    else
-        return false;
+    return lastState;
 }
 
 function extendedFunctionTransition(state, testChar) {
+
     var nextState = getNextState(state, testChar);
 
-    console.log(nextState);
+    if(nextState[0]!= null)
+        return nextState[0];
 
-    if(nextState!= null)
-        return nextState[1];
-    else
-        return null;
+    return null;
+
 }
-
 
 
 
 function getState(stateName) {
-    for(var i = 1; i < states.length; i++)
-        if(states[i].stateName == stateName)
+    for(var i = 1; i < states.length; i++){
+        if(states[i].stateName == stateName){
             return states[i];
+        }
+    }
+
 }
 
 function getNextState(state, transitionChar) {
     var nextStates = [];
-
     for(var i = 1; i< transitions.length; i++){
+        console.log(state.stateName);
          if(transitions[i].originState.stateName == state.stateName && transitions[i].transitionChar == transitionChar){
-             if(transitions[i].nextState != null)
-                nextStates.push(transitions[i].nextState);
+             if(transitions[i].nextState != null){
+                 var nextState = getState(transitions[i].nextState.stateName);
+                 nextStates.push(nextState);
+             }
          }
     }
-
-    console.log(nextStates);
-
     return nextStates;
 }
 
 function acceptsString(testString) {
-    var accept = transitionFunction(states[1], testString);
+    var lastState = transitionFunction(states[1], testString);
 
-    if(accept)
-        alert("String was accepted :D");
-    else
-        alert("The string was NOT accepted :(")
+    if(lastState!=null){
+        if(lastState.stateType == "F" || lastState.stateType == "IF")
+            alert("String was accepted :D");
+        else
+            alert("The string was NOT accepted :(");
+    }else {
+        alert("The string was NOT accepted :(");
+    }
+
 }
-
-
-/*
-function drawState(color) {
-    var $ = go.GraphObject.make;
-
-    myDiagram =
-        $(go.Diagram, "myDiagramDiv",  // must name or refer to the DIV HTML element
-            {
-                initialContentAlignment: go.Spot.LeftCenter,
-                "toolManager.mouseWheelBehavior": go.ToolManager.WheelZoom,
-                "clickCreatingTool.archetypeNodeData": { text: "node" },
-                "clickCreatingTool.isDoubleClick": false,
-                "undoManager.isEnabled": true
-            });
-
-    // define the Node template
-    myDiagram.nodeTemplate =
-        $(go.Node, "Auto",
-            new go.Binding("location", "loc", go
-                .Point.parse).makeTwoWay(go.Point.stringify),
-            $(go.Shape, "Circle",
-                {
-                    parameter1: 20,  // the corner has a large radius
-                    fill: $(go.Brush, "Linear", { 0: color, 1: "rgb(255, 255, 255)" }),
-                    portId: "",  // this Shape is the Node's port, not the whole Node
-                    fromLinkable: true, fromLinkableSelfNode: true, fromLinkableDuplicates: false,
-                    toLinkable: true, toLinkableSelfNode: true, toLinkableDuplicates: false,
-                    cursor: "pointer"
-                }),
-            $(go.TextBlock,
-                {
-                    font: "bold 15pt helvetica, bold arial, sans-serif",
-                    editable: true  // editing the text automatically updates the model data
-                },
-                new go.Binding("text").makeTwoWay())
-        );
-
-
-    // unlike the normal selection Adornment, this one includes a Button
-    myDiagram.nodeTemplate.selectionAdornmentTemplate =
-
-        // replace the default Link template in the linkTemplateMap
-        myDiagram.linkTemplate =
-            $(go.Link,  // the whole link panel
-                {
-                    curve: go.Link.Bezier, adjusting: go.Link.Stretch,
-                    reshapable: true, relinkableFrom: true, relinkableTo: true,
-                    toShortLength: 3
-                },
-                new go.Binding("points").makeTwoWay(),
-                new go.Binding("curviness"),
-                $(go.Shape,  // the link shape
-                    { strokeWidth: 1.5 }),
-                $(go.Shape,  // the arrowhead
-                    { toArrow: "standard", stroke: null }),
-                $(go.Panel, "Auto",
-                    $(go.Shape,  // the label background, which becomes transparent around the edges
-                        {
-                            fill: $(go.Brush, "Radial",
-                                { 0: "rgb(240, 240, 240)", 0.3: "rgb(240, 240, 240)", 1: "rgba(240, 240, 240, 0)" }),
-                            stroke: null
-                        }),
-                    $(go.TextBlock, "X",  // the label text
-                        {
-                            textAlign: "center",
-                            font: "20pt helvetica, arial, sans-serif",
-                            margin: 4,
-                            editable: true  // enable in-place editing
-                        },
-                        // editing the text automatically updates the model data
-                        new go.Binding("text").makeTwoWay())
-                )
-            );
-}
-*/
 
 function callSnackbar(displayText) {
     var x = document.getElementById("snackbar");
@@ -241,7 +209,6 @@ function save(filename, text) {
     document.body.removeChild(element);
 }
 
-
 function stateExist(stateName) {
     for(var i = 1; i < states.length; i++)
         if(states[i].stateName == stateName)
@@ -250,12 +217,19 @@ function stateExist(stateName) {
     return false;
 }
 
-
 function printStates() {
 
     for (var i = 1; i < states.length; i++) {
         console.log(states[i].stateName);
         console.log(states[i].stateType);
+    }
+}
+
+function printTransitions() {
+    for(var i = 1; i < transitions.length; i++){
+        console.log(transitions[i].transitionChar);
+        console.log(transitions[i].originState);
+        console.log(transitions[i].nextState);
     }
 }
 
