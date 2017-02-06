@@ -2,14 +2,15 @@
  * Created by mvill on 1/27/2017.
  */
 
-var states = [10];
-var transitions = [10];
 
-var nodeIds, shadowState, nodes, edges, network;
+var nodeIds, nodes, edges, network;
+
+var states = [];
+
+var transitions = [];
 
 nodeIds = [];
 edges = [];
-shadowState = true;
 nodes = new vis.DataSet();
 
 //region Objects
@@ -47,15 +48,13 @@ function createNewState(stateType) {
 }
 
 function createState(stateName, stateType, colorType) {
-    var newState = new State(stateName, stateType);
-    var text = "State " + stateName + " created";
 
     if(!stateExist(stateName)){
-        states.push(newState);
         var stateId = (Math.random() * 1e7).toString(32);
-        console.log("ID: " + stateId);
+        var newState = new State(stateName, stateType, stateId);
+        states.push(newState);
         addNode(stateId,stateName, colorType);
-        callSnackbar(text);
+        callSnackbar("State " + newState.stateName + " created");
     }else
         callSnackbar("State " + stateName + " already exists...");
 }
@@ -64,28 +63,31 @@ function createNewTransition() {
 
     var transitionData = prompt("Transition", "0,a,b");
 
-    var dataArray = transitionData.split(",");
-    var originState = getState(dataArray[1]);
-    var nextState = getState(dataArray[2]);
+    if(transitionData != null){
+        var dataArray = transitionData.split(",");
+        var originState = getState(dataArray[1]);
+        var nextState = getState(dataArray[2]);
 
-    createTransition(dataArray[0], originState, nextState)
+        createTransition(dataArray[0], originState, nextState);
+    }
 }
 
 function createTransition(transitionChar, originState, nextState)   {
+
+    console.log(transitionChar);
+    console.log(originState);
+    console.log(nextState);
+
     if(originState != null &&  nextState != null){
-        if(stateExist(originState.stateName) && stateExist(nextState.stateName)){
-            var transition = new Transition(transitionChar, originState, nextState);
-            transitions.push(transition);
+            transitions.push(new Transition(transitionChar, originState, nextState));
             createEdge(transitionChar, originState, nextState);
             callSnackbar("Char: " + transitionChar + " Origin: " + originState.stateName + " Next: " + nextState.stateName);
-        }
     }else{
         callSnackbar("Invalid input");
     }
 }
 
 function addNode(stateId, stateName, color) {
-    console.log("ID: " + stateId);
     nodes.add({id:stateId, label:stateName, color: {background:color, border:'black'}});
     nodeIds.push(stateId);
     init();
@@ -95,12 +97,18 @@ function createEdge(transitionChar, originState, nextState) {
     //var edge = {from: originState.stateId, to: nextState.stateId, label: transitionChar, font: {align: 'horizontal'}};
     //edges = new vis.DataSet(edge);
     //init();
+
+    console.log(originState.stateId);
+    console.log(nextState.stateId);
+
     var transitionId = (Math.random() * 1e7).toString(32);
     edges.push({
         id: transitionId,
         from: originState.stateId,
         to: nextState.stateId,
-        label: transitionChar
+        label: transitionChar,
+        color:{color:'rgba(30,30,30,0.2)', highlight:'blue'},
+        arrows:'to'
     });
 
     init();
@@ -108,6 +116,116 @@ function createEdge(transitionChar, originState, nextState) {
 
 //endregion
 
+function acceptsString(testString) {
+
+    console.log("Begin accept string {");
+    console.log("   initial state: " + states[0].stateName);
+    console.log("   state type: " + states[0].stateType);
+    console.log("   test string: " + testString);
+
+    var lastState = transitionFunction(states[0], testString);
+
+    if(lastState!=null){
+        if(lastState.stateType == "F" || lastState.stateType == "IF")
+            alert("String was accepted :D");
+        else
+            alert("The string was NOT accepted :(");
+    }else {
+        alert("The string was NOT accepted :(");
+    }
+
+    console.log("}End accept string");
+
+}
+
+function transitionFunction(initialState, testString) {
+
+    console.log("   Begin trans func{");
+    console.log("        initial state: " + initialState.stateName);
+    console.log("        state type: " + initialState.stateType);
+    console.log("        test string: " + testString);
+
+    var testChar = testString.charAt(0);
+
+    console.log("        test 1st char: " + testChar);
+
+    var lastState;
+    if (testString.length > 1) {
+        var newTestString =  testString.slice(1,testString.length);
+        console.log("       test 1st if new test string: " + newTestString);
+
+        lastState = extendedFunctionTransition(transitionFunction(initialState, newTestString), testChar);
+
+    }else
+    {
+        console.log("        test 2st if new test char: " + testChar);
+
+        lastState =extendedFunctionTransition(initialState, testChar);
+    }
+
+    console.log("       }End trans func");
+
+    return lastState;
+}
+
+function extendedFunctionTransition(state, testChar) {
+
+    console.log("           Begin ext func{");
+
+    console.log("               test char: " + testChar);
+
+    console.log("               state name: " + state.stateName);
+    console.log("               state type: " + state.stateType);
+
+    var nextState = getNextState(state, testChar);
+
+    console.log("               next state: " + nextState[0].stateName);
+
+    if(nextState[0]!= null){
+        console.log("           returns state name: " + nextState[0].stateName);
+        console.log("           returns state type: " + nextState[0].stateType);
+        return nextState[0];
+    }
+
+    console.log("           }End ext func");
+    return null;
+
+}
+
+function getNextState(state, transitionChar) {
+
+    console.log("               Begin get next state{");
+
+    console.log("                   state name: " + state.stateName);
+
+    console.log("                   transitions length: " + transitions.length);
+
+    var nextStates = [];
+    for(var i = 0; i< transitions.length; i++){
+
+        console.log("                   Transition " + i + " origin state :" + transitions[i].originState.stateName);
+        console.log("                   Transition " + i + " next state :" + transitions[i].nextState.stateName);
+        console.log("                   Transition " + i + " char trans :" + transitions[i].transitionChar);
+
+        if(transitions[i].originState.stateName == state.stateName && transitions[i].transitionChar == transitionChar){
+
+            console.log("                   transition match");
+
+            // if(transitions[i].nextState != null){
+
+            // console.log("State exists");
+            var nextState = transitions[i].nextState;
+            nextStates.push(nextState);
+            //}
+        }
+    }
+
+    //console.log("                   return next states: " + nextState.stateName);
+
+    console.log("               }End get next state");
+
+    return nextStates;
+}
 
 function init() {
     var container = document.getElementById('myDiagramDiv');
@@ -119,68 +237,11 @@ function init() {
     network = new vis.Network(container, data, options);
 }
 
-
-function transitionFunction(initialState, testString) {
-    var testChar = testString.charAt(0);
-    var lastState;
-
-    if (testString.length > 1) {
-        var newTestString =  testString.slice(1,testString.length);
-        lastState = extendedFunctionTransition(transitionFunction(initialState, newTestString), testChar);
-    }else
-    {
-        lastState =extendedFunctionTransition(initialState, testChar);
-    }
-
-    return lastState;
-}
-
-function extendedFunctionTransition(state, testChar) {
-
-    var nextState = getNextState(state, testChar);
-
-    if(nextState[0]!= null)
-        return nextState[0];
-
-    return null;
-
-}
-
-
-
 function getState(stateName) {
-    for(var i = 1; i < states.length; i++){
+    for(var i = 0; i < states.length; i++){
         if(states[i].stateName == stateName){
             return states[i];
         }
-    }
-
-}
-
-function getNextState(state, transitionChar) {
-    var nextStates = [];
-    for(var i = 1; i< transitions.length; i++){
-        console.log(state.stateName);
-         if(transitions[i].originState.stateName == state.stateName && transitions[i].transitionChar == transitionChar){
-             if(transitions[i].nextState != null){
-                 var nextState = getState(transitions[i].nextState.stateName);
-                 nextStates.push(nextState);
-             }
-         }
-    }
-    return nextStates;
-}
-
-function acceptsString(testString) {
-    var lastState = transitionFunction(states[1], testString);
-
-    if(lastState!=null){
-        if(lastState.stateType == "F" || lastState.stateType == "IF")
-            alert("String was accepted :D");
-        else
-            alert("The string was NOT accepted :(");
-    }else {
-        alert("The string was NOT accepted :(");
     }
 
 }
@@ -219,17 +280,16 @@ function stateExist(stateName) {
 
 function printStates() {
 
-    for (var i = 1; i < states.length; i++) {
-        console.log(states[i].stateName);
-        console.log(states[i].stateType);
+    for (var i = 0; i < states.length; i++) {
+        console.log("State name: " + states[i].stateName);
+        console.log("State type: " + states[i].stateType);
     }
 }
 
 function printTransitions() {
-    for(var i = 1; i < transitions.length; i++){
+    for(var i = 0; i < transitions.length; i++){
         console.log(transitions[i].transitionChar);
         console.log(transitions[i].originState);
         console.log(transitions[i].nextState);
     }
 }
-

@@ -44,7 +44,10 @@
             from {bottom: 30px; opacity: 1;}
             to {bottom: 0; opacity: 0;}
         }
+
     </style> <!--snack bar-->
+
+
     <script type="text/javascript" src="src/vis.js"></script>
     <link href="src/vis-network.min.css" rel="stylesheet" type="text/css" />
     <title id="AutomataId">Teoria de la Computacion</title>
@@ -54,11 +57,11 @@
 </head>
 
 <body>
-    <div id="myDiagramDiv" style="border: solid 2px black; width:100%; height: 400px" align="center"   ></div>
+    <div id="myDiagramDiv" style="border: solid 2px black; width:100%; height: 400px; background-color: white" align="center"   ></div>
 
     <!--<button id="SaveButton" onclick="save('automata.json',  myDiagram.model.toJson())">Save</button>-->
 
-    <button onclick="load(event)">Load</button><br>
+    <button onclick="load(event)" >Load</button><br>
 
     <button onclick="createNewTransition()">Create Transition</button><br>
 
@@ -70,7 +73,7 @@
 
     <button id = "normal" onclick="createNewState('N')">Normal</button>
 
-    <button id = "final" onclick="createNewState('F')">Final</button>
+    <button id = "final" onclick="createNewState('F')">Final</button> <br>
 
     <input id="jsonFile" type="file"><br>
 
