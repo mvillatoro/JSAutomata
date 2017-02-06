@@ -57,7 +57,13 @@
 </head>
 
 <body>
-    <div id="myDiagramDiv" style="border: solid 2px black; width:100%; height: 400px; background-color: white" align="center"   ></div>
+    <h1>Autómata finito determinista</h1>
+
+    <button onclick="hideShow('dfaDiv')" >DFA</button>
+
+    <div id="dfaDiv" style="display: none">
+
+    <div id="myDiagramDiv" style="border: solid 2px black; width:100%; height: 400px; background-color: white" align="center"  onclick="createNewState()" ></div>
 
     <!--<button id="SaveButton" onclick="save('automata.json',  myDiagram.model.toJson())">Save</button>-->
 
@@ -69,19 +75,29 @@
 
     <button onclick="acceptsString(document.getElementById('testString').value)">Test String</button><br>
 
-    <button id = "initial"  onclick="createNewState('I')">Initial</button>
-
-    <button id = "normal" onclick="createNewState('N')">Normal</button>
-
-    <button id = "final" onclick="createNewState('F')">Final</button> <br>
-
     <input id="jsonFile" type="file"><br>
 
-    <div id="snackbar"  >State created</div>
+    <div id="snackbar"  ></div>
 
-    <button onclick="printStates()">Print States</button>
+    </div>
 
-    <button onclick="printTransitions()">Print Transitions</button>
+
+    <h1>Autómata finito no determinista</h1>
+    <button onclick="hideShow('nfaDiv')" >NFA</button>
+
+    <div id="nfaDiv" style="display: none">
+
+        <div id="myNfaDiagramDiv" style="border: solid 2px black; width:100%; height: 400px; background-color: white" align="center"  onclick="createNewStateNfa(event)" ></div>
+
+        <button onclick="createNewTransitionNfa()">Create Transition</button><br>
+
+        <input id="testStringNfa" type="text">
+
+        <button onclick="acceptsStringNfa(document.getElementById('testString').value)">Test String</button><br>
+
+
+
+    </div>
 
 </body>
 

@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce18f935-c04e-41c7-bc11-217d162febb7" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Automata.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/State.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Transition.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DrawAutomata.js" afterPath="$PROJECT_DIR$/DrawAutomata.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MainPage.html" afterPath="$PROJECT_DIR$/MainPage.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -26,8 +31,8 @@
       <file leaf-file-name="MainPage.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MainPage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="73" column="71" lean-forward="true" selection-start-line="73" selection-start-column="71" selection-end-line="73" selection-end-column="71" />
+            <state relative-caret-position="374">
+              <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
               <folding>
                 <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="e#61#450#0" expanded="false" />
@@ -37,6 +42,9 @@
                 <element signature="e#903#1026#0" expanded="false" />
                 <element signature="e#1036#1151#0" expanded="false" />
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -45,35 +53,41 @@
       <file leaf-file-name="DrawAutomata.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DrawAutomata.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="303" column="0" lean-forward="true" selection-start-line="303" selection-start-column="0" selection-end-line="303" selection-end-column="0" />
+            <state relative-caret-position="833">
+              <caret line="421" column="0" lean-forward="true" selection-start-line="421" selection-start-column="0" selection-end-line="421" selection-end-column="0" />
               <folding>
-                <element signature="e#176#192#0" expanded="false" />
+                <element signature="e#43#59#0" expanded="false" />
                 <element signature="n#!!block;n#State#0" expanded="false" />
                 <element signature="n#!!block;n#Transition#0" expanded="false" />
-                <element signature="e#505#530#0" expanded="false" />
+                <element signature="e#372#384#0" expanded="false" />
                 <element signature="n#!!block;n#createNewState#0" expanded="false" />
-                <element signature="e#647#1034#0" expanded="false" />
                 <element signature="n#!!block;n#createState#0" expanded="false" />
-                <element signature="n#!!block;n#createNewTransition#0" expanded="false" />
-                <element signature="n#!!block;n#createTransition#0" expanded="false" />
                 <element signature="n#!!block;n#addNode#0" expanded="false" />
                 <element signature="n#!!block;n#createEdge#0" expanded="false" />
-                <element signature="e#3085#3097#0" expanded="false" />
+                <element signature="n#!!block;n#stateExist#0" expanded="false" />
+                <element signature="n#!!block;n#createNewTransition#0" expanded="false" />
+                <element signature="n#!!block;n#createTransition#0" expanded="false" />
+                <element signature="n#!!block;n#getState#0" expanded="false" />
                 <element signature="n#!!block;n#reverse#0" expanded="false" />
                 <element signature="n#!!block;n#acceptsString#0" expanded="false" />
                 <element signature="n#!!block;n#transitionFunction#0" expanded="false" />
                 <element signature="n#!!block;n#extendedFunctionTransition#0" expanded="false" />
-                <element signature="n#!!block;n#getNextState#0" expanded="false" />
                 <element signature="n#!!block;n#init#0" expanded="false" />
-                <element signature="n#!!block;n#getState#0" expanded="false" />
-                <element signature="n#!!block;n#callSnackbar#0" expanded="false" />
+                <element signature="n#!!block;n#getNextState#0" expanded="false" />
                 <element signature="n#!!block;n#load#0" expanded="false" />
                 <element signature="n#!!block;n#save#0" expanded="false" />
-                <element signature="n#!!block;n#stateExist#0" expanded="false" />
-                <element signature="n#!!block;n#printStates#0" expanded="false" />
-                <element signature="n#!!block;n#printTransitions#0" expanded="false" />
-                <element signature="e#8428#8583#0" expanded="false" />
+                <element signature="n#!!block;n#createNewStateNfa#0" expanded="false" />
+                <element signature="n#!!block;n#createStateNfa#0" expanded="false" />
+                <element signature="n#!!block;n#createNewTransitionNfa#0" expanded="false" />
+                <element signature="n#!!block;n#createTransitionNfa#0" expanded="false" />
+                <element signature="n#!!block;n#addNodeNfa#0" expanded="false" />
+                <element signature="n#!!block;n#getStateNfa#0" expanded="false" />
+                <element signature="n#!!block;n#getNextStatesNfa#0" expanded="false" />
+                <element signature="n#!!block;n#stateExistNfa#0" expanded="false" />
+                <element signature="n#!!block;n#callSnackbar#0" expanded="false" />
+                <element signature="n#!!block;n#hideShow#0" expanded="false" />
+                <marker date="1486410394891" expanded="false" signature="8720:9032" ph="{...}" />
+                <marker date="1486410394891" expanded="false" signature="9053:9275" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -99,7 +113,6 @@
       <find>save</find>
       <find>load</find>
       <find>automata</find>
-      <find>getState</find>
       <find>already exists</find>
       <find>conso</find>
       <find>transitions[i].originState.stateName</find>
@@ -109,6 +122,8 @@
       <find>console</find>
       <find>\n</find>
       <find>edges</find>
+      <find>getState</find>
+      <find>stateExist</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -285,18 +300,18 @@
       <workItem from="1485265920139" duration="15565000" />
       <workItem from="1485401360558" duration="9051000" />
       <workItem from="1485490214380" duration="18585000" />
-      <workItem from="1485729085587" duration="68455000" />
+      <workItem from="1485729085587" duration="81671000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="112414000" />
+    <option name="totallyTimeSpent" value="125630000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16492693" sideWeight="0.49626467" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16458334" sideWeight="0.49626467" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -322,7 +337,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="18" />
+      <option name="time" value="21" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -340,6 +355,9 @@
             <element signature="e#903#1026#0" expanded="false" />
             <element signature="e#1036#1151#0" expanded="false" />
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -357,6 +375,9 @@
             <element signature="e#903#1026#0" expanded="false" />
             <element signature="e#1036#1151#0" expanded="false" />
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -374,6 +395,9 @@
             <element signature="e#903#1026#0" expanded="false" />
             <element signature="e#1036#1151#0" expanded="false" />
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -391,6 +415,9 @@
             <element signature="e#903#1026#0" expanded="false" />
             <element signature="e#1036#1151#0" expanded="false" />
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -411,26 +438,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/numberCalculator.js" />
-    <entry file="file://$PROJECT_DIR$/Automata.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="2" column="3" lean-forward="false" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!doc;n#Automata#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/State.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Transition.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -447,10 +454,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/State.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Automata.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="2" column="3" lean-forward="false" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MainPage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="73" column="71" lean-forward="true" selection-start-line="73" selection-start-column="71" selection-end-line="73" selection-end-column="71" />
+        <state relative-caret-position="374">
+          <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding>
             <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
             <element signature="e#61#450#0" expanded="false" />
@@ -460,41 +483,50 @@
             <element signature="e#903#1026#0" expanded="false" />
             <element signature="e#1036#1151#0" expanded="false" />
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DrawAutomata.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="303" column="0" lean-forward="true" selection-start-line="303" selection-start-column="0" selection-end-line="303" selection-end-column="0" />
+        <state relative-caret-position="833">
+          <caret line="421" column="0" lean-forward="true" selection-start-line="421" selection-start-column="0" selection-end-line="421" selection-end-column="0" />
           <folding>
-            <element signature="e#176#192#0" expanded="false" />
+            <element signature="e#43#59#0" expanded="false" />
             <element signature="n#!!block;n#State#0" expanded="false" />
             <element signature="n#!!block;n#Transition#0" expanded="false" />
-            <element signature="e#505#530#0" expanded="false" />
+            <element signature="e#372#384#0" expanded="false" />
             <element signature="n#!!block;n#createNewState#0" expanded="false" />
-            <element signature="e#647#1034#0" expanded="false" />
             <element signature="n#!!block;n#createState#0" expanded="false" />
-            <element signature="n#!!block;n#createNewTransition#0" expanded="false" />
-            <element signature="n#!!block;n#createTransition#0" expanded="false" />
             <element signature="n#!!block;n#addNode#0" expanded="false" />
             <element signature="n#!!block;n#createEdge#0" expanded="false" />
-            <element signature="e#3085#3097#0" expanded="false" />
+            <element signature="n#!!block;n#stateExist#0" expanded="false" />
+            <element signature="n#!!block;n#createNewTransition#0" expanded="false" />
+            <element signature="n#!!block;n#createTransition#0" expanded="false" />
+            <element signature="n#!!block;n#getState#0" expanded="false" />
             <element signature="n#!!block;n#reverse#0" expanded="false" />
             <element signature="n#!!block;n#acceptsString#0" expanded="false" />
             <element signature="n#!!block;n#transitionFunction#0" expanded="false" />
             <element signature="n#!!block;n#extendedFunctionTransition#0" expanded="false" />
-            <element signature="n#!!block;n#getNextState#0" expanded="false" />
             <element signature="n#!!block;n#init#0" expanded="false" />
-            <element signature="n#!!block;n#getState#0" expanded="false" />
-            <element signature="n#!!block;n#callSnackbar#0" expanded="false" />
+            <element signature="n#!!block;n#getNextState#0" expanded="false" />
             <element signature="n#!!block;n#load#0" expanded="false" />
             <element signature="n#!!block;n#save#0" expanded="false" />
-            <element signature="n#!!block;n#stateExist#0" expanded="false" />
-            <element signature="n#!!block;n#printStates#0" expanded="false" />
-            <element signature="n#!!block;n#printTransitions#0" expanded="false" />
-            <element signature="e#8428#8583#0" expanded="false" />
+            <element signature="n#!!block;n#createNewStateNfa#0" expanded="false" />
+            <element signature="n#!!block;n#createStateNfa#0" expanded="false" />
+            <element signature="n#!!block;n#createNewTransitionNfa#0" expanded="false" />
+            <element signature="n#!!block;n#createTransitionNfa#0" expanded="false" />
+            <element signature="n#!!block;n#addNodeNfa#0" expanded="false" />
+            <element signature="n#!!block;n#getStateNfa#0" expanded="false" />
+            <element signature="n#!!block;n#getNextStatesNfa#0" expanded="false" />
+            <element signature="n#!!block;n#stateExistNfa#0" expanded="false" />
+            <element signature="n#!!block;n#callSnackbar#0" expanded="false" />
+            <element signature="n#!!block;n#hideShow#0" expanded="false" />
+            <marker date="1486410394891" expanded="false" signature="8720:9032" ph="{...}" />
+            <marker date="1486410394891" expanded="false" signature="9053:9275" ph="{...}" />
           </folding>
         </state>
       </provider>
