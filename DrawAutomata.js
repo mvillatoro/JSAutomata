@@ -72,11 +72,7 @@ function createNewTransition() {
     }
 }
 
-function createTransition(transitionChar, originState, nextState)   {
-
-    console.log(transitionChar);
-    console.log(originState);
-    console.log(nextState);
+function createTransition(transitionChar, originState, nextState)       {
 
     if(originState != null &&  nextState != null){
             transitions.push(new Transition(transitionChar, originState, nextState));
@@ -116,14 +112,22 @@ function createEdge(transitionChar, originState, nextState) {
 
 //endregion
 
+//region DFA
+
+function reverse(s){
+    return s.split("").reverse().join("");
+}
+
 function acceptsString(testString) {
+
+    var newTestString = reverse(testString);
 
     console.log("Begin accept string {");
     console.log("   initial state: " + states[0].stateName);
     console.log("   state type: " + states[0].stateType);
-    console.log("   test string: " + testString);
+    console.log("   test string: " + newTestString);
 
-    var lastState = transitionFunction(states[0], testString);
+    var lastState = transitionFunction(states[0], newTestString);
 
     if(lastState!=null){
         if(lastState.stateType == "F" || lastState.stateType == "IF")
@@ -181,7 +185,7 @@ function extendedFunctionTransition(state, testChar) {
 
     console.log("               next state: " + nextState[0].stateName);
 
-    if(nextState[0]!= null){
+    if(nextState[0] != null){
         console.log("           returns state name: " + nextState[0].stateName);
         console.log("           returns state type: " + nextState[0].stateType);
         return nextState[0];
@@ -195,9 +199,7 @@ function extendedFunctionTransition(state, testChar) {
 function getNextState(state, transitionChar) {
 
     console.log("               Begin get next state{");
-
     console.log("                   state name: " + state.stateName);
-
     console.log("                   transitions length: " + transitions.length);
 
     var nextStates = [];
@@ -215,12 +217,15 @@ function getNextState(state, transitionChar) {
 
             // console.log("State exists");
             var nextState = transitions[i].nextState;
+            console.log(nextState);
             nextStates.push(nextState);
+            console.log(nextStates);
             //}
         }
     }
 
     //console.log("                   return next states: " + nextState.stateName);
+    console.log(nextStates);
 
     console.log("               }End get next state");
 
@@ -293,3 +298,7 @@ function printTransitions() {
         console.log(transitions[i].nextState);
     }
 }
+
+//endregion
+
+
