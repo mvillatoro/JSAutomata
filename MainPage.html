@@ -57,6 +57,7 @@
 </head>
 
 <body>
+
     <h1>Autómata finito determinista</h1>
 
     <button onclick="hideShow('dfaDiv')" >DFA</button>
@@ -74,6 +75,8 @@
     <input id="testString" type="text">
 
     <button onclick="acceptsString(document.getElementById('testString').value)">Test String</button><br>
+
+    <button onclick="clean()">Clean</button>
 
     <input id="jsonFile" type="file"><br>
 
@@ -95,7 +98,7 @@
 
         <button onclick="acceptsStringNfa(document.getElementById('testString').value)">Test String</button><br>
 
-
+        <button onclick="showNfaTransitions()">Show transitions</button>
 
     </div>
 

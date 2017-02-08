@@ -23,7 +23,6 @@ function Transition(transitionChar, originState, nextState) {
 var nodeIds, nodes, edges, network;
 
 var states = [];
-
 var transitions = [];
 
 nodeIds = [];
@@ -141,10 +140,6 @@ function getState(stateName) {
             return states[i];
 }
 
-function reverse(s){
-    return s.split("").reverse().join("");
-}
-
 function acceptsString(testString) {
 
     var newTestString = reverse(testString);
@@ -165,16 +160,13 @@ function acceptsString(testString) {
 function transitionFunction(initialState, testString) {
 
     var testChar = testString.charAt(0);
-
     var lastState;
+
     if (testString.length > 1) {
         var newTestString =  testString.slice(1,testString.length);
         lastState = extendedFunctionTransition(transitionFunction(initialState, newTestString), testChar);
-
     }else
-    {
         lastState =extendedFunctionTransition(initialState, testChar);
-    }
 
     return lastState;
 }
@@ -183,24 +175,11 @@ function extendedFunctionTransition(state, testChar) {
 
     var nextState = getNextState(state, testChar);
 
-    if(nextState[0] != null){
-        console.log("           returns state name: " + nextState[0].stateName);
-        console.log("           returns state type: " + nextState[0].stateType);
+    if(nextState[0] != null)
         return nextState[0];
-    }
 
     return null;
 
-}
-
-function init() {
-    var container = document.getElementById('myDiagramDiv');
-    var data = {
-        nodes: nodes,
-        edges: edges
-    };
-    var options = {};
-    network = new vis.Network(container, data, options);
 }
 
 function getNextState(state, transitionChar) {
@@ -214,6 +193,16 @@ function getNextState(state, transitionChar) {
         }
     }
     return nextStates;
+}
+
+function init() {
+    var container = document.getElementById('myDiagramDiv');
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+    var options = {};
+    network = new vis.Network(container, data, options);
 }
 
 function load(evt) {
@@ -233,8 +222,18 @@ function save(filename, text) {
     document.body.removeChild(element);
 }
 
-//endregion
+function clean() {
+    nodes = undefined;
+    network = undefined;
+    nodeIds.length = 0;
+    edges.length = 0;
+    states.length = 0;
+    transitions.length = 0;
 
+    init();
+}
+
+//endregion
 
 //region NFA
 
@@ -277,7 +276,8 @@ function createNewStateNfa() {
             else if(altKey)
                 createStateNfa(stateName,"N", "#808080"); //NORMAL ALT
         }
-    }
+    }else
+        alert("Initial - ctrl \nNode - alt \nFinal - shift");
 }
 
 function createStateNfa(stateName, stateType, colorType) {
@@ -355,14 +355,10 @@ function getStateNfa(stateName) {
 
 function acceptsStringNfa(testString) {
 
-    var accepts = false;
-    var lastStates = transitionFunctionNfa(statesNfa[0], testString);
+    var newTestString = reverse(testString);
+    var lastStates = transitionFunctionNfa(statesNfa[0], newTestString);
 
-//    for(var  i = 0; i < lastStates.length; i++)
-        if(lastStates == "F" || lastStates == "IF" )
-            accepts = true;
-
-    if(accepts)
+    if(lastStates.stateType == "F" || lastStates.stateType == "IF")
         alert("String was accepted :D");
     else
         alert("The string was NOT accepted :(");
@@ -371,35 +367,24 @@ function acceptsStringNfa(testString) {
 
 function transitionFunctionNfa(initialState, testString){
 
-    var lastStates;
-    var returnStates;
     var testChar =  testString.charAt(0);
+    var returnStates;
 
-    if(testString > 1){
-        var newTestString =  testString.slice(1,testString.length);
-        lastStates = extendedFunctionTransitionNfa(transitionFunctionNfa(initialState, newTestString), testChar);
-
-        for(var i = 0; i < lastStates.length; i++){
-            returnStates = transitionFunctionNfa(lastStates[i], newTestString);
-        }
-
-    }else{
-        lastStates = extendedFunctionTransition(initialState, testChar);
-        for(var j = 0; j < lastStates.length; j++){
-            returnStates = transitionFunctionNfa(lastStates[j], testChar);
-        }
-    }
+    if(testString.length > 1){
+        var newTestString = testString.slice(1,testString.length);
+        returnStates =  extendedFunctionTransitionNfa(transitionFunctionNfa(initialState, newTestString), testChar);
+    }else
+        returnStates = extendedFunctionTransitionNfa(initialState, testChar);
 
     return returnStates;
-
 }
 
 function extendedFunctionTransitionNfa(state, testChar) {
 
     var nextStates = getNextStatesNfa(state, testChar);
 
-    if(nextStates != null){
-        return nextStates;
+    if(nextStates[0] != null){
+        return nextStates[0];
     }
 
     return null;
@@ -408,18 +393,23 @@ function extendedFunctionTransitionNfa(state, testChar) {
 function getNextStatesNfa(state, transitionChar){
 
     var nextStates = [];
+
     for(var i = 0; i< transitionsNfa.length; i++){
-
         if(transitionsNfa[i].originState.stateName == state.stateName && transitionsNfa[i].transitionChar == transitionChar){
-
             var nextState = transitionsNfa[i].nextState;
             nextStates.push(nextState);
         }
     }
-
     return nextStates;
 }
 
+function showNfaTransitions() {
+    for(var i = 0; i< transitionsNfa.length; i++){
+        console.log(transitionsNfa[i].originState);
+        console.log(transitionsNfa[i].nextState);
+        console.log(transitionsNfa[i].transitionChar);
+    }
+}
 
 function stateExistNfa(stateName) {
     for(var i = 0; i < statesNfa.length; i++)
@@ -429,9 +419,7 @@ function stateExistNfa(stateName) {
     return false;
 }
 
-
 //endregion
-
 
 //region Global Functions
 
@@ -451,6 +439,10 @@ function hideShow(divID) {
     else
         dfaDiv.style.display = 'block';
 
+}
+
+function reverse(s){
+    return s.split("").reverse().join("");
 }
 
 //endregion
