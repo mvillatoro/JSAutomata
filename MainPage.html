@@ -56,6 +56,7 @@
 
 </head>
 
+<!--
 <body>
 
     <h1>Autómata finito determinista</h1>
@@ -66,7 +67,7 @@
 
     <div id="myDiagramDiv" style="border: solid 2px black; width:100%; height: 400px; background-color: white" align="center"  onclick="createNewState()" ></div>
 
-    <!--<button id="SaveButton" onclick="save('automata.json',  myDiagram.model.toJson())">Save</button>-->
+    <button id="SaveButton" onclick="save('automata.json',  myDiagram.model.toJson())">Save</button>
 
     <button onclick="load(event)" >Load</button><br>
 
@@ -96,15 +97,64 @@
 
         <input id="testStringNfa" type="text">
 
-        <button onclick="acceptsStringNfa(document.getElementById('testString').value)">Test String</button><br>
+        <button onclick="acceptsStringNfa(document.getElementById('testStringNfa').value)">Test String</button><br>
 
         <button onclick="showNfaTransitions()">Show transitions</button>
 
     </div>
 
+
 </body>
 
-<script src="go.js"></script>
+-->
+
+<body>
+
+<h1>Autómata finito determinista</h1>
+
+<button onclick="hideShow('dfaDiv')" >DFA</button>
+
+<div id="dfaDiv" style="display: none">
+
+    <div id="dfaDiagram" style="border: solid 2px black; width:100%; height: 400px; background-color: white" align="center"  onclick="addState('dfaDiagram')" ></div>
+
+    <button onclick="addTransition('dfaDiagram')" >Add transition</button><br>
+
+    <input id="dfaTestString" type="text">
+
+    <button onclick="acceptString(document.getElementById('dfaTestString').value, 'dfaDiagram')" >Test string</button><br>
+
+</div>
+
+<h1>Autómata finito no determinista</h1>
+
+<button onclick="hideShow('nfaDiv')" >NFA</button>
+
+<div id="nfaDiv" style="display: none">
+
+    <div id="nfaDiagram" style="border: solid 2px black; width:100%; height: 400px; background-color: white" align="center"  onclick="addState('nfaDiagram')" ></div>
+
+    <button onclick="addTransition('nfaDiagram')" >Add transition</button><br>
+
+    <input id="nfaTestString" type="text">
+
+    <button onclick="acceptString(document.getElementById('nfaTestString').value, 'nfaDiagram')" >Test string</button><br>
+
+</div>
+
+
+<div id="snackbar"  ></div>
+
+
+</body>
+
+<script src="TestFunctions.js"></script>
+<script src="State.js"></script>
+<script src="Transition.js"></script>
+<script src="ElementManager.js"></script>
+<script src="AutomataOperations.js"></script>
+<script src="Automata.js"></script>
+<script src="EvaluateAutomata.js"></script>
 <script src="DrawAutomata.js"></script>
 
 </html>
