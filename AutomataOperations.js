@@ -6,8 +6,18 @@ function getInitialNode(nodeList) {
     for(var i = 0; i < nodeList.length; i++)
         if(nodeList[i].isInitial)
             return nodeList[i];
+
 }
 
+function getInitialNodes(nodeList) {
+    var returnList = [];
+
+    for(var i = 0; i < nodeList.length; i++)
+        if (nodeList[i].isInitial)
+            returnList.push(nodeList[i]);
+
+    return returnList;
+}
 function getNextState(origin, transitionChar, transitionList) {
     for(var i = 0; i < transitionList.length; i++)
         if(transitionList[i].originState.stateName == origin.stateName && transitionList[i].transitionChar == transitionChar )
@@ -18,10 +28,12 @@ function getNextState(origin, transitionChar, transitionList) {
 
 function getNextStates(origin, transitionChar, transitionList) {
     var listToReturn = [];
-    for(var i = 0; i < transitionList.length; i++){
+
+    for(var i = 0; i < transitionList.length; i++)
         if(transitionList[i].originState.stateName == origin.stateName && transitionList[i].transitionChar == transitionChar)
-            listToReturn.push(transitionList[i].nextState)
-    }
+            listToReturn.push(transitionList[i].nextState);
+
+
 
     return listToReturn;
 }

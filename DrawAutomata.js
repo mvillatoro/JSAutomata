@@ -68,21 +68,24 @@ function defineAutomata(divId) {
 
 function acceptString(testString, divId) {
 
-
     var result;
     var automata =  defineAutomata(divId);
 
     if(automata.type == "dfa"){
-        var lastNode =  evaluateDFA(testString,automata);
-        result = lastNode.accepted;
-
+        result =  evaluateDFA(testString,automata);
     }else if(automata.type == "nfa"){
         result = evaluateNFA(testString,automata);
     }
-
 
     if(result)
         alert("The string was accepted! :D");
     else
         alert("The string was NOT accepted :(");
+}
+
+function printSates(divId) {
+
+    var automata = defineAutomata(divId);
+
+    auxPrintStates(automata);
 }

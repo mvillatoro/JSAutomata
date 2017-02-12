@@ -20,6 +20,8 @@ function hideShow(divID) {
 
 }
 
-function reverse(s){
-    return s.split("").reverse().join("");
+function auxPrintStates(automata) {
+    for(var i  = 0; i < automata.stateList.length; i++)
+        console.log(automata.stateList[i]);
+
 }

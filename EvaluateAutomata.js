@@ -5,8 +5,6 @@
 function evaluateDFA(testString, automata) {
     var currentNode = getInitialNode(automata.stateList);
 
-    console.log("test string: " + testString);
-
     for(var i = 0; i < testString.length; i++){
         currentNode = getNextState(currentNode, testString.charAt(i), automata.transitionList);
         if(currentNode == null)
@@ -16,23 +14,31 @@ function evaluateDFA(testString, automata) {
 }
 
 function evaluateNFA(testString, automata) {
-    var currentList = getInitialNode(automata.stateList);
+    var currentList = getInitialNodes(automata.stateList);
 
     for(var  i = 0; i < testString.length; i++){
         var tempList = [];
         for(var j = 0; j < currentList.length; j++){
-            tempList.push(getNextStates(currentList[i], testString.charAt(i), automata.transitionList));
+            var states = getNextStates(currentList[j], testString.charAt(i), automata.transitionList)
+            tempList.push.apply(tempList, states);
         }
-        currentList.length = 0;
 
         console.log(tempList);
 
-        currentList = tempList;
+        currentList.length = 0;
+        for(var l = 0; l < tempList.length; l++){
+            currentList.push(tempList[l]);
+        }
     }
-    for(var k = 0; k < currentList.length; k++)
-        if(currentList[i].accepted)
-            return true;
 
+    console.log(currentList);
+
+    for(var k = 0; k < currentList.length; k++){
+
+        if(currentList[k].accepted){
+            return true;
+        }
+    }
 
     return false;
 
