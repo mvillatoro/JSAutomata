@@ -47,7 +47,6 @@
 
     </style> <!--snack bar-->
 
-
     <script type="text/javascript" src="src/vis.js"></script>
     <link href="src/vis-network.min.css" rel="stylesheet" type="text/css" />
     <title id="AutomataId">Teoria de la Computacion</title>
@@ -142,10 +141,37 @@
 
     <button onclick="acceptString(document.getElementById('nfaTestString').value, 'nfaDiagram')" >Test string</button><br>
 
-    <button onclick="printSates('nfaDiagram')" >Show states</button>
+    <input type="checkbox" id="isNfaE"> NFAE <br>
+
+    <button onclick="convertNfaToDfa()" >To DFA</button>
 
 </div>
 
+<h1>Operaciones de Automatas</h1>
+
+<button onclick="hideShow('opsDiv')" >Ops</button>
+
+<div id="opsDiv" style="display: none ; overflow: hidden" >
+
+    <div style="width: 100%">
+
+        <div id="opsDiagramA"  style="border: solid 2px black; width: 50%; height: 400px; background-color: white; float: left" align="center"  onclick="addState('opsDiagramA')" ></div>
+
+        <div id="opsDiagramB"  style="margin-left: 620px; border: solid 2px black; height: 400px; background-color: white" align="center"  onclick="addState('opsDiagramB')" ></div>
+
+    </div>
+
+    <button onclick="addTransition('opsDiagramA')" >Transition automata A</button><br>
+    <button onclick="addTransition('opsDiagramB')" >Transition automata B</button><br>
+
+    <button>Intersección</button><br>
+    <button>Union</button><br>
+    <button>Complemento</button><br>
+
+    <input  id="opsTestString" type="text">
+    <button>Test String</button>
+
+</div>
 
 <div id="snackbar" ></div>
 
@@ -155,6 +181,7 @@
 <script src="TestFunctions.js"></script>
 <script src="State.js"></script>
 <script src="Transition.js"></script>
+<script src="AuxEdge.js"></script>
 <script src="ElementManager.js"></script>
 <script src="AutomataOperations.js"></script>
 <script src="Automata.js"></script>

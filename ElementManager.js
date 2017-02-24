@@ -23,7 +23,6 @@ function createEdge(automata, transitionChar, originState, nextState, divId) {
     var origin = getNode(originState, automata);
     var next = getNode(nextState, automata);
 
-
     if(origin != null && next != null){
         if(divId == "dfaDiagram"){
             if(!edgeExists(origin, next, transitionChar, automata) && !dfaTransitionChar(origin, transitionChar, automata)){
@@ -36,6 +35,8 @@ function createEdge(automata, transitionChar, originState, nextState, divId) {
             else
                 callSnackbar("Transition already exists.");
         }
+    }else {
+        alert("State does not exists");
     }
 }    
     
@@ -57,7 +58,7 @@ function craftEdge(automata, transitionId, originState, nextState, transitionCha
 
     newEdge = new Transition(originState, nextState, transitionChar);
     automata.transitionList.push(newEdge);
-    addEde(automata, transitionId, originState, nextState, transitionChar, divId);
+    addNewEdge(automata, transitionId, originState, nextState, transitionChar, divId);
     callSnackbar("Transition " + transitionChar + ", " + originState.stateName, + ", " + nextState.stateName)
 
 }
@@ -69,7 +70,7 @@ function addNode(stateId, stateName, color, automata, divId) {
     init(divId,automata);
 }
 
-function addEde(automata, transitionId, originState, nextState, transitionChar, divId) {
+function addNewEdge(automata, transitionId, originState, nextState, transitionChar, divId) {
     automata.edges.push({
         id: transitionId,
         from: originState.stateId,
@@ -90,6 +91,12 @@ function init(divId, automata) {
             break;
         case "nfaDiagram":
             container = document.getElementById('nfaDiagram');
+            break;
+        case "opsDiagramA":
+            container = document.getElementById('opsDiagramA');
+            break;
+        case "opsDiagramB":
+            container = document.getElementById('opsDiagramB');
             break;
         default:
             console.log("no pos guau...");
