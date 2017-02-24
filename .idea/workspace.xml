@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce18f935-c04e-41c7-bc11-217d162febb7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AuxEdge.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AutomataOperations.js" afterPath="$PROJECT_DIR$/AutomataOperations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DrawAutomata.js" afterPath="$PROJECT_DIR$/DrawAutomata.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ElementManager.js" afterPath="$PROJECT_DIR$/ElementManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EvaluateAutomata.js" afterPath="$PROJECT_DIR$/EvaluateAutomata.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MainPage.html" afterPath="$PROJECT_DIR$/MainPage.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -32,8 +27,8 @@
       <file leaf-file-name="MainPage.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MainPage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="156" column="0" lean-forward="true" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
+            <state relative-caret-position="246">
+              <caret line="163" column="86" lean-forward="false" selection-start-line="163" selection-start-column="86" selection-end-line="163" selection-end-column="86" />
               <folding>
                 <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="e#61#450#0" expanded="false" />
@@ -92,8 +87,8 @@
       <file leaf-file-name="AutomataOperations.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AutomataOperations.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="187" column="56" lean-forward="false" selection-start-line="187" selection-start-column="56" selection-end-line="187" selection-end-column="56" />
+            <state relative-caret-position="595">
+              <caret line="273" column="61" lean-forward="true" selection-start-line="273" selection-start-column="61" selection-end-line="273" selection-end-column="61" />
               <folding>
                 <element signature="n#!!doc;n#getInitialNode#0" expanded="false" />
                 <element signature="n#!!block;n#getInitialNode#0" expanded="false" />
@@ -113,7 +108,9 @@
                 <element signature="n#!!block;n#getTransition#0" expanded="false" />
                 <element signature="n#!!block;n#getNodeByName#0" expanded="false" />
                 <element signature="n#!!block;n#getClosure#0" expanded="false" />
-                <marker date="1487632881169" expanded="false" signature="5039:5365" ph="{...}" />
+                <element signature="e#5466#6128#0" expanded="false" />
+                <element signature="n#!!block;n#combineAlphabet#0" expanded="false" />
+                <marker date="1487900300295" expanded="false" signature="5039:5365" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -196,11 +193,11 @@
         <option value="$PROJECT_DIR$/State.js" />
         <option value="$PROJECT_DIR$/TestFunctions.js" />
         <option value="$PROJECT_DIR$/AuxEdge.js" />
-        <option value="$PROJECT_DIR$/AutomataOperations.js" />
         <option value="$PROJECT_DIR$/EvaluateAutomata.js" />
-        <option value="$PROJECT_DIR$/MainPage.html" />
         <option value="$PROJECT_DIR$/ElementManager.js" />
         <option value="$PROJECT_DIR$/DrawAutomata.js" />
+        <option value="$PROJECT_DIR$/MainPage.html" />
+        <option value="$PROJECT_DIR$/AutomataOperations.js" />
       </list>
     </option>
   </component>
@@ -373,12 +370,12 @@
       <workItem from="1487392039223" duration="11000" />
       <workItem from="1487472668914" duration="7356000" />
       <workItem from="1487810994779" duration="1680000" />
-      <workItem from="1487894371691" duration="1809000" />
+      <workItem from="1487894371691" duration="5523000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205599000" />
+    <option name="totallyTimeSpent" value="209313000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -452,7 +449,9 @@
             <element signature="n#!!block;n#getTransition#0" expanded="false" />
             <element signature="n#!!block;n#getNodeByName#0" expanded="false" />
             <element signature="n#!!block;n#getClosure#0" expanded="false" />
-            <marker date="1487632881169" expanded="false" signature="5039:5365" ph="{...}" />
+            <element signature="e#5466#6128#0" expanded="false" />
+            <element signature="n#!!block;n#combineAlphabet#0" expanded="false" />
+            <marker date="1487900300295" expanded="false" signature="5039:5365" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -548,7 +547,9 @@
             <element signature="n#!!block;n#getTransition#0" expanded="false" />
             <element signature="n#!!block;n#getNodeByName#0" expanded="false" />
             <element signature="n#!!block;n#getClosure#0" expanded="false" />
-            <marker date="1487632881169" expanded="false" signature="5039:5365" ph="{...}" />
+            <element signature="e#5466#6128#0" expanded="false" />
+            <element signature="n#!!block;n#combineAlphabet#0" expanded="false" />
+            <marker date="1487900300295" expanded="false" signature="5039:5365" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -671,7 +672,9 @@
             <element signature="n#!!block;n#getTransition#0" expanded="false" />
             <element signature="n#!!block;n#getNodeByName#0" expanded="false" />
             <element signature="n#!!block;n#getClosure#0" expanded="false" />
-            <marker date="1487632881169" expanded="false" signature="5039:5365" ph="{...}" />
+            <element signature="e#5466#6128#0" expanded="false" />
+            <element signature="n#!!block;n#combineAlphabet#0" expanded="false" />
+            <marker date="1487900300295" expanded="false" signature="5039:5365" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -801,7 +804,9 @@
             <element signature="n#!!block;n#getTransition#0" expanded="false" />
             <element signature="n#!!block;n#getNodeByName#0" expanded="false" />
             <element signature="n#!!block;n#getClosure#0" expanded="false" />
-            <marker date="1487632881169" expanded="false" signature="5039:5365" ph="{...}" />
+            <element signature="e#5466#6128#0" expanded="false" />
+            <element signature="n#!!block;n#combineAlphabet#0" expanded="false" />
+            <marker date="1487900300295" expanded="false" signature="5039:5365" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1049,44 +1054,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/EvaluateAutomata.js">
+    <entry file="file://$PROJECT_DIR$/DrawAutomata.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+        <state relative-caret-position="680">
+          <caret line="66" column="33" lean-forward="false" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
           <folding>
-            <element signature="n#!!doc;n#evaluateDFA#0" expanded="false" />
-            <element signature="n#!!block;n#evaluateDFA#0" expanded="false" />
-            <element signature="n#!!block;n#evaluateNFA#0" expanded="false" />
-            <element signature="n#!!block;n#nfaToDfa#0" expanded="false" />
-            <element signature="n#!!block;n#evaluateNFAE#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AutomataOperations.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="187" column="56" lean-forward="false" selection-start-line="187" selection-start-column="56" selection-end-line="187" selection-end-column="56" />
-          <folding>
-            <element signature="n#!!doc;n#getInitialNode#0" expanded="false" />
-            <element signature="n#!!block;n#getInitialNode#0" expanded="false" />
-            <element signature="n#!!block;n#getInitialNodes#0" expanded="false" />
-            <element signature="n#!!block;n#getNextState#0" expanded="false" />
-            <element signature="n#!!block;n#getNextStates#0" expanded="false" />
-            <element signature="n#!!block;n#getAlphabet#0" expanded="false" />
-            <element signature="n#!!block;n#isInArray#0" expanded="false" />
-            <element signature="n#!!block;n#checkIfNodeExists#0" expanded="false" />
-            <element signature="n#!!block;n#checkIfListExistsAux#0" expanded="false" />
-            <element signature="n#!!block;n#checkIfListsAreEquals#0" expanded="false" />
-            <element signature="n#!!block;n#getNewNodes#0" expanded="false" />
-            <element signature="n#!!block;n#getNewNodeName#0" expanded="false" />
-            <element signature="n#!!block;n#checkIfAccepted#0" expanded="false" />
-            <element signature="n#!!block;n#checkIfInitial#0" expanded="false" />
-            <element signature="n#!!block;n#getNewTransitions#0" expanded="false" />
-            <element signature="n#!!block;n#getTransition#0" expanded="false" />
-            <element signature="n#!!block;n#getNodeByName#0" expanded="false" />
-            <element signature="n#!!block;n#getClosure#0" expanded="false" />
-            <marker date="1487632881169" expanded="false" signature="5039:5365" ph="{...}" />
+            <element signature="n#!!block;n#addTransition#0" expanded="false" />
+            <element signature="n#!!block;n#acceptString#0" expanded="false" />
+            <element signature="n#!!block;n#printSates#0" expanded="false" />
+            <element signature="n#!!block;n#convertNfaToDfa#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1111,10 +1087,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/EvaluateAutomata.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc;n#evaluateDFA#0" expanded="false" />
+            <element signature="n#!!block;n#evaluateDFA#0" expanded="false" />
+            <element signature="n#!!block;n#evaluateNFA#0" expanded="false" />
+            <element signature="n#!!block;n#nfaToDfa#0" expanded="false" />
+            <element signature="n#!!block;n#evaluateNFAE#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AutomataOperations.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="273" column="61" lean-forward="true" selection-start-line="273" selection-start-column="61" selection-end-line="273" selection-end-column="61" />
+          <folding>
+            <element signature="n#!!doc;n#getInitialNode#0" expanded="false" />
+            <element signature="n#!!block;n#getInitialNode#0" expanded="false" />
+            <element signature="n#!!block;n#getInitialNodes#0" expanded="false" />
+            <element signature="n#!!block;n#getNextState#0" expanded="false" />
+            <element signature="n#!!block;n#getNextStates#0" expanded="false" />
+            <element signature="n#!!block;n#getAlphabet#0" expanded="false" />
+            <element signature="n#!!block;n#isInArray#0" expanded="false" />
+            <element signature="n#!!block;n#checkIfNodeExists#0" expanded="false" />
+            <element signature="n#!!block;n#checkIfListExistsAux#0" expanded="false" />
+            <element signature="n#!!block;n#checkIfListsAreEquals#0" expanded="false" />
+            <element signature="n#!!block;n#getNewNodes#0" expanded="false" />
+            <element signature="n#!!block;n#getNewNodeName#0" expanded="false" />
+            <element signature="n#!!block;n#checkIfAccepted#0" expanded="false" />
+            <element signature="n#!!block;n#checkIfInitial#0" expanded="false" />
+            <element signature="n#!!block;n#getNewTransitions#0" expanded="false" />
+            <element signature="n#!!block;n#getTransition#0" expanded="false" />
+            <element signature="n#!!block;n#getNodeByName#0" expanded="false" />
+            <element signature="n#!!block;n#getClosure#0" expanded="false" />
+            <element signature="e#5466#6128#0" expanded="false" />
+            <element signature="n#!!block;n#combineAlphabet#0" expanded="false" />
+            <marker date="1487900300295" expanded="false" signature="5039:5365" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MainPage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="156" column="0" lean-forward="true" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
+        <state relative-caret-position="246">
+          <caret line="163" column="86" lean-forward="false" selection-start-line="163" selection-start-column="86" selection-end-line="163" selection-end-column="86" />
           <folding>
             <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
             <element signature="e#61#450#0" expanded="false" />
@@ -1134,19 +1154,6 @@
             <element signature="n#style#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DrawAutomata.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="66" column="33" lean-forward="false" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
-          <folding>
-            <element signature="n#!!block;n#addTransition#0" expanded="false" />
-            <element signature="n#!!block;n#acceptString#0" expanded="false" />
-            <element signature="n#!!block;n#printSates#0" expanded="false" />
-            <element signature="n#!!block;n#convertNfaToDfa#0" expanded="false" />
           </folding>
         </state>
       </provider>

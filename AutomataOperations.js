@@ -211,3 +211,107 @@ function getClosure(state, transitionList, closureList) {
     return newList;
 
 }
+
+var contains = function(needle) {
+    // Per spec, the way to identify NaN is that it is not equal to itself
+    var findNaN = needle !== needle;
+    var indexOf;
+
+    if(!findNaN && typeof Array.prototype.indexOf === 'function') {
+        indexOf = Array.prototype.indexOf;
+    } else {
+        indexOf = function(needle) {
+            var i = -1, index = -1;
+
+            for(i = 0; i < this.length; i++) {
+                var item = this[i];
+
+                if((findNaN && item !== item) || item === needle) {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
+        };
+    }
+
+    return indexOf.call(this, needle) > -1;
+};
+
+function combineAlphabet(automataA, automataB) {
+
+    var toReturn = [];
+    var alphabetA = getAlphabet(automataA);
+    var alphabetB = getAlphabet(automataB);
+
+    for(var i = 0; i < alphabetA.length; i++)
+        if(!contains.call(toReturn, alphabetA[i]))
+            toReturn.push(alphabetA[i]);
+
+    for(var j = 0; j < alphabetB.length; j++)
+        if(!contains.call(toReturn, alphabetB[j]))
+            toReturn.push(alphabetB[j]);
+
+    return toReturn;
+
+}
+
+function newSimpleStates(nodes, operation) {
+
+    var returnList = [];
+
+    for(var i = 0; i < nodes.length; i++){
+
+    }
+
+}
+
+function newSimpleEdges() {
+    
+}
+
+function automataOperation(automataA, automataB, operation) {
+
+    var initialNodeA = getInitialNode(automataA.stateList);
+    var initialNodeB = getInitialNode(automataB.stateList);
+    var alphabet = combineAlphabet(automataA,automataB);
+    var ndoes = initialNodeA.concat(initialNodeB);
+    var newEdges = [];
+
+
+
+
+    var newAutomata = new Automata("dfa");
+
+    var newNodes = newSimpleStates(nodes, operation);
+    var newEdges = newSimpleEdges(newNodes, newEdges);
+
+    for(var z = 0; z< newNodes.length; z++)
+        newAutomata.stateList.push(newNodes[z]);
+
+    for(var x = 0; x < newEdges.length; x++)
+        newAutomata.transitionList.push(newEdges[x]);
+
+    return newAutomata;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
