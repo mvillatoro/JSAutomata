@@ -96,45 +96,40 @@ function nfaToDfa(automata){
 
 }
 
-function evaluateNFAE(testString, automata){
+function closure(state, transitionList){
 
-    var currentList = [];
+    var closureStates = [];
 
-    currentList.push(getInitialNode(automata.stateList));
+    closureStates.push(state);
 
-    for(var i = 0; i < testString.length; i++){
-        var closure = [];
-
-        for(var j = 0; j < currentList.length; j++){
-            closure.push(currentList[j]);
-            var returnList = getClosure(currentList[j], automata.transitionList, closure);
-            for(var o = 0; o < returnList.length; o++)
-                closure.push(returnList[o]);
-        }
-
-        var tempList = [];
-
-        for(var k = 0; k < closure.length;k ++)
-            tempList.push(getNextStates(closure[k], testString.charAt(i), automata.transitionList));
-
-        currentList.length = 0;
-
-        for(var l = 0; l < tempList.length; l++)
-            currentList.push(tempList[l]);
+    for(var i = 0; i < transitionList.length; i++){
+        if(transitionList[i].originState == state)
+            if(transitionList[i].transitionChar == "e")
+                closureStates.push(transitionList[i].nextState);
     }
 
-    var closure2 = [];
-
-    for(var m = 0; m < currentList.length; m++){
-        closure2.push(currentList[m]);
-        getClosure(currentList[m], automata.transitionList, closure2);
-    }
-
-    for(var n = 0; n < closure2.length; n++)
-        if(closure2[n].accepted)
-            return true;
-
-    return false;
+    return closureStates;
 
 }
 
+function evaluateNFAE(testString, automata){
+    
+    var closureStates;
+    var testState = [];
+    testState.push(getInitialNode(automata.stateList));
+    var nextState = [];
+    //closureStates = closure(state, automata.transitionList);
+
+    for(var i = 0; i < testString.length; i++){
+        
+        for(var j = 0 ; j < testState.length; j++){
+            
+            }
+        }
+
+
+
+        testState.length = 0;
+    }
+
+}

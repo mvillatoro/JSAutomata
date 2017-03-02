@@ -6,6 +6,7 @@ var dfaAutomata = new Automata("dfa");
 var nfaAutomata = new Automata("nfa");
 var opsDiagramA = new Automata("nfa");
 var opsDiagramB = new Automata("nfa");
+var opsDiagramC = new Automata("nfa");
 
 
 function addState(divId) {
@@ -66,6 +67,8 @@ function defineAutomata(divId) {
         return opsDiagramA;
     else if(divId == "opsDiagramB")
         return opsDiagramB;
+    else if(divId == "opsDiagramC")
+        return opsDiagramC;
 }
 
 function acceptString(testString, divId) {
@@ -96,4 +99,11 @@ function printSates(divId) {
 
 function convertNfaToDfa() {
     nfaToDfa(nfaAutomata);
+}
+
+function complimentOperation(divId){
+
+    var complimentAutomata = defineAutomata(divId);
+    compliment(opsDiagramA);
+
 }

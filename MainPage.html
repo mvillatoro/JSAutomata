@@ -55,58 +55,6 @@
 
 </head>
 
-<!--
-<body>
-
-    <h1>Autómata finito determinista</h1>
-
-    <button onclick="hideShow('dfaDiv')" >DFA</button>
-
-    <div id="dfaDiv" style="display: none">
-
-    <div id="myDiagramDiv" style="border: solid 2px black; width:100%; height: 400px; background-color: white" align="center"  onclick="createNewState()" ></div>
-
-    <button id="SaveButton" onclick="save('automata.json',  myDiagram.model.toJson())">Save</button>
-
-    <button onclick="load(event)" >Load</button><br>
-
-    <button onclick="createNewTransition()">Create Transition</button><br>
-
-    <input id="testString" type="text">
-
-    <button onclick="acceptsString(document.getElementById('testString').value)">Test String</button><br>
-
-    <button onclick="clean()">Clean</button>
-
-    <input id="jsonFile" type="file"><br>
-
-    <div id="snackbar"  ></div>
-
-    </div>
-
-
-    <h1>Autómata finito no determinista</h1>
-    <button onclick="hideShow('nfaDiv')" >NFA</button>
-
-    <div id="nfaDiv" style="display: none">
-
-        <div id="myNfaDiagramDiv" style="border: solid 2px black; width:100%; height: 400px; background-color: white" align="center"  onclick="createNewStateNfa(event)" ></div>
-
-        <button onclick="createNewTransitionNfa()">Create Transition</button><br>
-
-        <input id="testStringNfa" type="text">
-
-        <button onclick="acceptsStringNfa(document.getElementById('testStringNfa').value)">Test String</button><br>
-
-        <button onclick="showNfaTransitions()">Show transitions</button>
-
-    </div>
-
-
-</body>
-
--->
-
 <body>
 
 <h1>Autómata finito determinista</h1>
@@ -159,20 +107,31 @@
 
         <div id="opsDiagramB"  style="margin-left: 620px; border: solid 2px black; height: 400px; background-color: white" align="center"  onclick="addState('opsDiagramB')" ></div>
 
+
     </div>
+
+    <div id="opsDiagramC" style="border: solid 2px black; width:50%; height: 400px; background-color: white" align="center" ></div>
 
     <button onclick="addTransition('opsDiagramA')" >Transition automata A</button><br>
     <button onclick="addTransition('opsDiagramB')" >Transition automata B</button><br>
 
-    <button>Intersección</button><br>
-    <button>Union</button><br>
-    <button>Complemento</button><br>
+    <input type="checkbox" id="UNION"> UNION <br>
+    <input type="checkbox" id="INTERSECTION"> INTERSECTION <br>
+    <input type="checkbox" id="DIFFERENCE"> DIFFERENCE <br>
+
+    <button onclick="automataOperations('opsDiagramC')" >Do Operation</button><br>
+
+    <!--
 
     <input  id="opsTestStringA" type="text">
     <button onclick="acceptString(document.getElementById('opsTestStringA').value, 'opsDiagramA')" >Test String A</button><br>
-
     <input  id="opsTestStringB" type="text">
-    <button onclick="acceptString(document.getElementById('opsTestStringB').value, 'opsDiagramB')" >Test String B</button>
+    <button onclick="acceptString(document.getElementById('opsTestStringB').value, 'opsDiagramB')" >Test String B</button><br>
+
+    -->
+
+    <input  id="opsTestStringC" type="text">
+    <button onclick="acceptString(document.getElementById('opsTestStringC').value, 'opsDiagramC')" >Test String C</button>
 
 
 </div>
@@ -187,9 +146,10 @@
 <script src="Transition.js"></script>
 <script src="AuxEdge.js"></script>
 <script src="ElementManager.js"></script>
-<script src="AutomataOperations.js"></script>
+<script src="AutomataActions.js"></script>
 <script src="Automata.js"></script>
 <script src="EvaluateAutomata.js"></script>
+<script src="operations.js"></script>
 <script src="DrawAutomata.js"></script>
 
 </html>

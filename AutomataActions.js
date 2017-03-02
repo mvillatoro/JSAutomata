@@ -76,7 +76,7 @@ function checkIfListsAreEquals(list, state) {
 
     for(var j = 0; j < list.length; j++)
         if(!checkIfNodeExists(state, list[j]))
-            return false
+            return false;
 
     return true;
 
@@ -156,9 +156,6 @@ function getNewTransitions(states, transitions, automata) {
         createEdge(automata, tc, os, ns, "nfaDiagram")
 
         var newEdge = getTransition(automata, tc, os, ns);
-
-        if( newEdge != null)
-            returnList.push(newEdge);
     }
 
     return returnList;
@@ -194,21 +191,7 @@ function getClosure(state, transitionList, closureList) {
         console.log(closureList[j]);
         newList.push(closureList[j]);
     }
-/*
-    for(var i = 0; i < nextStates.length; i++){
-        if(!checkIfNodeExists(newList, nextStates[i])){
-            newList.push(nextStates[i]);
 
-            var newNewList = [];
-            newNewList = getClosure(nextStates[i], transitionList, newList);
-
-            for(var k = 0; k < newNewList.length; k++)
-                newList.push(newNewList[k]);
-        }
-    }
-*/
-    console.log("********************");
-    return newList;
 
 }
 
@@ -257,45 +240,135 @@ function combineAlphabet(automataA, automataB) {
 
 }
 
-function newSimpleStates(nodes, operation) {
+function newSimpleStates(nodes, operation, automata,divId) {
 
     var returnList = [];
 
     for(var i = 0; i < nodes.length; i++){
 
+        var newName = getNewNodeName(nodes[i]);
+        var initial;
+        var accept;
+
+        if(nodes[i].side == 2)
+            if(nodes[0].isInitial && nodes[nodes.length-1].isInitial)
+                initial = true;
+
+        if(operation =="Union"){
+            for(var j = 0; j < nodes[i].length; j++){
+                if(nodes[i][j].accepted)
+                    accept = true;
+            }
+        }else if(operation == "Intersection"){
+            nodes[i].accepted = true;
+
+            for(var k = 0; k < nodes[i].length; k++){
+                if(!nodes[i][k].accepted)
+                    accept = false;
+            }
+        }
+        else if(operation == "Complement"){
+            if(nodes[i].size == 2){
+                if(nodes[0].accepted && !nodes[nodes.length-1].accepted)
+                    accept = false;
+            }
+        }
+        autoState(automata, newName, initial,accept, divId);
     }
 
+    return returnList;
+
 }
 
-function newSimpleEdges() {
-    
+function autoState(automata, stateName, initial, accept, divId) {
+
+    if(accept)
+        createState(automata, stateName,"F", "#00ff99", divId); //FINAL
+    else if(initial)
+        createState(automata, stateName,"I", "#66a3ff", divId); //INITIAL
+    else
+        createState(automata, stateName,"N", "#808080", divId); //NORMAL
 }
 
-function automataOperation(automataA, automataB, operation) {
+function newSimpleEdges(nodes, edges, automata, divId) {
+
+    for(var i = 0; i < edges.length; i++){
+        var transitionChar = edges[i].transitionChar;
+        var origin = getNodeByName(getNewNodeName(edges[i].originState, nodes));
+        var next = getNodeByName(getNewNodeName(edges[i].nextState, nodes));
+
+        createEdge(automata, transitionChar, origin, next, divId);
+    }
+}
+
+function index(el) {
+    var children = el.parentNode.childNodes,
+        i = 0;
+    for (; i < children.length; i++) {
+        if (children[i] == el) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+/*
+function automataOperation(automataA, automataB, operation, divId) {
 
     var initialNodeA = getInitialNode(automataA.stateList);
     var initialNodeB = getInitialNode(automataB.stateList);
     var alphabet = combineAlphabet(automataA,automataB);
-    var ndoes = initialNodeA.concat(initialNodeB);
+
+    var nodes = [];
+    nodes.push(initialNodeA);
+    nodes.push(initialNodeB);
+
     var newEdges = [];
 
+    for(var i = 0; i < nodes.size; i++){
+        for(var j = 0; j < alphabet.size; j++){
+            var tempList = [];
+            for(var k = 0; k < nodes[i].length;k++){
+                var nextNode;
+                if(index(nodes[i][k]) % 2 == 0)
+                    nextNode = getNextState(nodes[i][k], alphabet[j], automataA.transitionList);
+                else
+                    nextNode = getNextState(nodes[i][k], alphabet[j], automataB.transitionList);
+            }
 
+            if(nextNode!= null)
+                tempList.push(nextNode);
+        }
 
+        var temp2 = checkIfListExistsAux(nodes, tempList);
+        if(temp2 == null && tempList.length != 0)
+            nodes.push(tempList);
+
+        var transitionChar = alphabet[j];
+        var originNodes  = nodes[i];
+        var nextNodes;
+
+        if(temp2 != null)
+            nextNodes = temp2;
+        else
+            nextNodes = tempList;
+
+        var newEdge = new Transition(originNodes, nextNodes, transitionChar);
+        newEdges.push(newEdge);
+
+    }
 
     var newAutomata = new Automata("dfa");
 
-    var newNodes = newSimpleStates(nodes, operation);
-    var newEdges = newSimpleEdges(newNodes, newEdges);
-
-    for(var z = 0; z< newNodes.length; z++)
-        newAutomata.stateList.push(newNodes[z]);
-
-    for(var x = 0; x < newEdges.length; x++)
-        newAutomata.transitionList.push(newEdges[x]);
+    var autoNodes = newSimpleStates(nodes, operation, newAutomata, divId);
+    var autoEdges = newSimpleEdges(autoNodes, newEdges, newAutomata, divId);
 
     return newAutomata;
     
 }
+*/
+
 
 
 

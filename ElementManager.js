@@ -34,11 +34,25 @@ function createEdge(automata, transitionChar, originState, nextState, divId) {
                 craftEdge(automata, transitionId, origin, next, transitionChar, divId);
             else
                 callSnackbar("Transition already exists.");
+        }else if(divId == "opsDiagramA"){
+            if(!edgeExists(origin, next, transitionChar, automata) && !dfaTransitionChar(origin, transitionChar, automata)){
+                craftEdge(automata, transitionId, origin, next, transitionChar, divId);
+            }else
+                callSnackbar("Transition already exists.");
+        }else if(divId == "opsDiagramB"){
+            if(!edgeExists(origin, next, transitionChar, automata) && !dfaTransitionChar(origin, transitionChar, automata)){
+                craftEdge(automata, transitionId, origin, next, transitionChar, divId);
+            }else
+                callSnackbar("Transition already exists.");
+        }else if(divId == "opsDiagramC"){
+            if(!edgeExists(origin, next, transitionChar, automata))
+                craftEdge(automata, transitionId, origin, next, transitionChar, divId);
         }
+
     }else {
         alert("State does not exists");
     }
-}    
+}
     
 function craftNode(stateName, stateId, color, automata, divId, isInitial, isFinal) {
     var newState;
@@ -97,6 +111,9 @@ function init(divId, automata) {
             break;
         case "opsDiagramB":
             container = document.getElementById('opsDiagramB');
+            break;
+        case "opsDiagramC":
+            container = document.getElementById('opsDiagramC');
             break;
         default:
             console.log("no pos guau...");
