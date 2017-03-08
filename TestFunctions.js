@@ -9,17 +9,6 @@ function callSnackbar(displayText){
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
-function hideShow(divID) {
-
-    var dfaDiv = document.getElementById(divID);
-
-    if(dfaDiv.style.display == 'block')
-        dfaDiv.style.display = 'none';
-    else
-        dfaDiv.style.display = 'block';
-
-}
-
 function auxPrintStates(automata) {
     for(var i  = 0; i < automata.stateList.length; i++)
         console.log(automata.stateList[i]);

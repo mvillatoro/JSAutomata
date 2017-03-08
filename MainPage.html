@@ -57,82 +57,26 @@
 
 <body>
 
-<h1>Autómata finito determinista</h1>
+<h1>Automata</h1>
 
-<button onclick="hideShow('dfaDiv')" >DFA</button>
+<div id="dfaDiv">
 
-<div id="dfaDiv" style="display: none">
+    <div id="automataDiagram" style="border: solid 2px black; width:100%; height: 400px; background-color: white" align="center"  onclick="addState('automataDiagram')" ></div>
 
-    <div id="dfaDiagram" style="border: solid 2px black; width:100%; height: 400px; background-color: white" align="center"  onclick="addState('dfaDiagram')" ></div>
+    <button onclick="addTransition('automataDiagram')" >Add transition</button><br><br>
 
-    <button onclick="addTransition('dfaDiagram')" >Add transition</button><br>
-
-    <input id="dfaTestString" type="text">
-
-    <button onclick="acceptString(document.getElementById('dfaTestString').value, 'dfaDiagram')" >Test string</button><br>
-
-    <button onclick="printSates('dfaDiagram')" >Show states</button>
-
-</div>
-
-<h1>Autómata finito no determinista</h1>
-
-<button onclick="hideShow('nfaDiv')" >NFA</button>
-
-<div id="nfaDiv" style="display: none">
-
-    <div id="nfaDiagram" style="border: solid 2px black; width:100%; height: 400px; background-color: white" align="center"  onclick="addState('nfaDiagram')" ></div>
-
-    <button onclick="addTransition('nfaDiagram')" >Add transition</button><br>
-
-    <input id="nfaTestString" type="text">
-
-    <button onclick="acceptString(document.getElementById('nfaTestString').value, 'nfaDiagram')" >Test string</button><br>
-
-    <input type="checkbox" id="isNfaE"> NFAE <br>
-
-    <button onclick="convertNfaToDfa()" >To DFA</button>
-
-</div>
-
-<h1>Operaciones de Automatas</h1>
-
-<button onclick="hideShow('opsDiv')" >Ops</button>
-
-<div id="opsDiv" style="display: none ; overflow: hidden" >
-
-    <div style="width: 100%">
-
-        <div id="opsDiagramA"  style="border: solid 2px black; width: 50%; height: 400px; background-color: white; float: left" align="center"  onclick="addState('opsDiagramA')" ></div>
-
-        <div id="opsDiagramB"  style="margin-left: 620px; border: solid 2px black; height: 400px; background-color: white" align="center"  onclick="addState('opsDiagramB')" ></div>
+    <input  type="radio" id="automataR" name="automataR" value="DFA">DFA &emsp;<br>
+    <input type="radio" id="automataR" name="automataR" value="NFA" checked="checked">NFA<br>
+    <input type="radio" id="automataR" name="automataR" value="NFAE">NFAE<br>
+    <input type="radio" id="automataR" name="automataR" value="PDA">PDA<br>
+    <input type="radio" id="automataR" name="automataR" value="TURING">TURING<br><br>
 
 
-    </div>
+    <button onclick="convertNfaToDfa()" >NFA -> DFA</button><br>
+    <button onclick="saveAutomata()" >Save Automata</button><br>
 
-    <div id="opsDiagramC" style="border: solid 2px black; width:50%; height: 400px; background-color: white" align="center" ></div>
-
-    <button onclick="addTransition('opsDiagramA')" >Transition automata A</button><br>
-    <button onclick="addTransition('opsDiagramB')" >Transition automata B</button><br>
-
-    <input type="checkbox" id="UNION"> UNION <br>
-    <input type="checkbox" id="INTERSECTION"> INTERSECTION <br>
-    <input type="checkbox" id="DIFFERENCE"> DIFFERENCE <br>
-
-    <button onclick="automataOperations('opsDiagramC')" >Do Operation</button><br>
-
-    <!--
-
-    <input  id="opsTestStringA" type="text">
-    <button onclick="acceptString(document.getElementById('opsTestStringA').value, 'opsDiagramA')" >Test String A</button><br>
-    <input  id="opsTestStringB" type="text">
-    <button onclick="acceptString(document.getElementById('opsTestStringB').value, 'opsDiagramB')" >Test String B</button><br>
-
-    -->
-
-    <input  id="opsTestStringC" type="text">
-    <button onclick="acceptString(document.getElementById('opsTestStringC').value, 'opsDiagramC')" >Test String C</button>
-
+    <input id="testString" type="text">
+    <button onclick="acceptString(document.getElementById('testString').value)" >Test string</button><br>
 
 </div>
 
@@ -149,7 +93,6 @@
 <script src="AutomataActions.js"></script>
 <script src="Automata.js"></script>
 <script src="EvaluateAutomata.js"></script>
-<script src="operations.js"></script>
 <script src="DrawAutomata.js"></script>
 
 </html>

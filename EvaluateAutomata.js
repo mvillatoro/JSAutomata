@@ -7,19 +7,21 @@ function evaluateDFA(testString, automata) {
 
     for(var i = 0; i < testString.length; i++){
         currentNode = getNextState(currentNode, testString.charAt(i), automata.transitionList);
+        console.log(currentNode);
         if(currentNode == null)
-            return false
+            return false;
     }
     return currentNode.accepted;
 }
 
 function evaluateNFA(testString, automata) {
+
     var currentList = getInitialNodes(automata.stateList);
 
     for(var  i = 0; i < testString.length; i++){
         var tempList = [];
         for(var j = 0; j < currentList.length; j++){
-            var states = getNextStates(currentList[j], testString.charAt(i), automata.transitionList)
+            var states = getNextStates(currentList[j], testString.charAt(i), automata.transitionList);
             tempList.push.apply(tempList, states);
         }
 
@@ -41,95 +43,80 @@ function evaluateNFA(testString, automata) {
 }
 
 function nfaToDfa(automata){
-    var alphabet = getAlphabet(automata);
-    var newEdges = [];
-    var nodes = [getInitialNode(automata.stateList)];
 
-    var i = 0;
+    var transitionTable = [];
+    var states = [];
 
-    while (i < nodes.length){
-        for(var a = 0; a < alphabet.length; a++){
-            var tempList = [];
-            for(var it = 0; i < nodes[i].length; it++){
-                var nextNodes = getNextStates(nodes[i][it], alphabet[a], automata.transitionList);
-                for(var nn = 0; nn < nextNodes.length; nn++){
-                    if(checkIfNodeExists(tempList, nextNodes[nn]))
-                        tempList.push(nextNodes[nn]);
-                }
-            }
+    for(var i = 0; i < automata.transitionList.length; i++){
+        var tr = new transitionRow();
+        tr.originStateT.push(automata.transitionList[i].originState);
+        tr.transitionCharT = automata.transitionList[i].transitionChar;
+        tr.nextStateT.push(automata.transitionList[i].nextState);
+        
+        transitionTable.push(tr);
+    }    
 
-            var temp2 = checkIfListExistsAux(nodes, tempList)
-            if(tempList == null && tempList.length != 0)
-                nodes.push(tempList);
 
-            var tempAuxEdges = new auxEdge();
+    for(var j = 0; j < automata.stateList.length; j++)
+        states.push(automata.stateList[j].stateName);
 
-            tempAuxEdges.transitionChar = alphabet[a];
-
-            for(var z = 0; z <  nodes[i].length; z++)
-                tempAuxEdges.originState.push(nodes[i][z]);
-
-            if(temp2 != null)
-                for(var x = 0; x < temp2.length; x++)
-                    tempAuxEdges.nextState.push(temp2);
-            else
-                for(var y = 0; y <  tempList.length; y++)
-                    tempAuxEdges.nextState.push(tempList[y]);
-
-            if(tempAuxEdges.nextState.length != 0)
-                newEdges.push(tempAuxEdges);
-        }
-        i++;
-    }
-
-    var returnAutomata = new Automata("dfa");
-    var statesToAdd = getNewNodes(nodes, returnAutomata);
-    var transitionToAdd = getNewTransitions(statesToAdd, newEdges, returnAutomata);
-
-    for(var w = 0; w < statesToAdd.length; w++)
-        returnAutomata.stateList.push(statesToAdd);
-
-    for(var v = 0; v < transitionToAdd.length; v++)
-        returnAutomata.transitionList.push(transitionToAdd);
-
-    return returnAutomata;
-
-}
-
-function closure(state, transitionList){
-
-    var closureStates = [];
-
-    closureStates.push(state);
-
-    for(var i = 0; i < transitionList.length; i++){
-        if(transitionList[i].originState == state)
-            if(transitionList[i].transitionChar == "e")
-                closureStates.push(transitionList[i].nextState);
-    }
-
-    return closureStates;
+    combination(states);
+        
+    getAlphabet(automata.transitionList);
 
 }
 
 function evaluateNFAE(testString, automata){
-    
-    var closureStates;
-    var testState = [];
-    testState.push(getInitialNode(automata.stateList));
-    var nextState = [];
-    //closureStates = closure(state, automata.transitionList);
+
+    var currentList = [];
+    currentList.push(getInitialNode(automata.stateList));
 
     for(var i = 0; i < testString.length; i++){
-        
-        for(var j = 0 ; j < testState.length; j++){
-            
-            }
+
+        var closure = [];
+        for(var j = 0; j < currentList.length; j++){
+            closure.push(currentList[j]);
+            closure.push.apply(closure, getClosure(currentList[j], automata.transitionList));
         }
 
+        var tempList = [];
+        for(var k = 0; k < closure.length; k++)
+            tempList.push.apply(tempList, getNextStates(closure[k], testString.charAt(i), automata.transitionList));
 
-
-        testState.length = 0;
+        currentList.length = 0;
+        currentList.push.apply(currentList, tempList);
     }
 
+    for(var l = 0; l < closure.length; l++)
+        if(closure[l].accepted)
+            return true;
+
+    return false;
+
+}
+
+function transitionRow(){
+    this.originStateT = [];
+    this.transitionCharT = "";
+    this.nextStateT = [];
+}
+
+function combination(stateArray){
+    var combi = [];
+    var temp= "";
+    var letLen = Math.pow(2, stateArray.length);
+
+    for (var i = 0; i < letLen ; i++){
+        temp= "";
+        for (var j=0;j<stateArray.length;j++) {
+            if ((i & Math.pow(2,j))){ 
+                temp += stateArray[j]
+            }
+        }
+        if (temp !== "") {
+            combi.push(temp);
+        }
+    }
+
+    console.log(combi.join("\n"));
 }

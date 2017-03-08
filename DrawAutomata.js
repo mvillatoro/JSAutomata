@@ -4,17 +4,15 @@
 
 var dfaAutomata = new Automata("dfa");
 var nfaAutomata = new Automata("nfa");
-var opsDiagramA = new Automata("nfa");
-var opsDiagramB = new Automata("nfa");
-var opsDiagramC = new Automata("nfa");
 
+var savedAutomata;
 
-function addState(divId) {
+//dvchm
+
+function addState(automataId) {
     var shiftKey = false;
     var ctrlKey = false;
     var altKey = false;
-
-    var automataType = defineAutomata(divId);
 
     if(event.shiftKey && event.ctrlKey)
         shiftKey = ctrlKey = true;
@@ -25,25 +23,26 @@ function addState(divId) {
     else if(event.altKey)
         altKey = true;
 
+        var definedAutomata = defineAutomata()
+
     if(shiftKey || ctrlKey || altKey){
 
         var stateName = prompt("State name", "State");
 
         if(stateName != null){
             if(shiftKey && ctrlKey)
-                createState(automataType, stateName,"IF", "#00ff99", divId); //INITIAL FINAL
+                createState(definedAutomata, stateName,"IF", "#00ff99", automataId); //INITIAL FINAL
             else if(shiftKey)
-                createState(automataType, stateName,"F", "#00ff99", divId); //FINAL SHIFT
+                createState(definedAutomata, stateName,"F", "#00ff99", automataId); //FINAL SHIFT
             else if(ctrlKey)
-                createState(automataType, stateName,"I", "#66a3ff", divId); //INITIAL CONTROL
+                createState(definedAutomata, stateName,"I", "#66a3ff", automataId); //INITIAL CONTROL
             else if(altKey)
-                createState(automataType, stateName,"N", "#808080", divId); //NORMAL ALT
+                createState(definedAutomata, stateName,"N", "#808080", automataId); //NORMAL ALT
         }
-    }else
-        alert("Alt: Node \nShift: Final \nCtrl: Initial");
+    }
 }
 
-function addTransition(divId) {
+function addTransition(automataId) {
 
     var transitionData = prompt("Define transition", "0,a,b");
 
@@ -51,59 +50,55 @@ function addTransition(divId) {
         var dataArray = transitionData.split(",");
         var originState = dataArray[1];
         var nextState = dataArray[2];
-        createEdge(defineAutomata(divId), dataArray[0], originState, nextState, divId);
+        createEdge(defineAutomata(), dataArray[0], originState, nextState, automataId);
     }else
         callSnackbar("Invalid input");
 
 }
 
-function defineAutomata(divId) {
+function defineAutomata() {
 
-    if(divId == "dfaDiagram")
-       return dfaAutomata;
-    else if(divId == "nfaDiagram")
+    if(document.getElementsByName('automataR')[0].checked)
+        return dfaAutomata;
+    else if(document.getElementsByName('automataR')[1].checked)
         return nfaAutomata;
-    else if(divId == "opsDiagramA")
-        return opsDiagramA;
-    else if(divId == "opsDiagramB")
-        return opsDiagramB;
-    else if(divId == "opsDiagramC")
-        return opsDiagramC;
+    else
+        alert("Not implemented");
 }
 
-function acceptString(testString, divId) {
+function acceptString(testString) {
     var result;
-    var automata =  defineAutomata(divId);
+    var automata =  defineAutomata();
 
-    if(automata.type == "dfa"){
+    if(automata.type == "dfa")
         result =  evaluateDFA(testString,automata);
-    }else if(document.getElementById("isNfaE").checked){
-        result = evaluateNFAE(testString, automata);
-        alert("is nfa");
-    } else if(automata.type == "nfa"){
-        result = evaluateNFA(testString,automata);
-    }
-
+    else if(automata.type == "nfa")
+        result = evaluateNFA(testString, automata);
+    
     if(result)
         alert("The string was accepted! :D");
     else
         alert("The string was NOT accepted :(");
 }
 
-function printSates(divId) {
-
-    var automata = defineAutomata(divId);
-
-    auxPrintStates(automata);
-}
-
 function convertNfaToDfa() {
+
+    console.log(nfaAutomata);
+
     nfaToDfa(nfaAutomata);
 }
 
-function complimentOperation(divId){
+function saveAutomata(){
 
-    var complimentAutomata = defineAutomata(divId);
-    compliment(opsDiagramA);
+    saveAutomata = defineAutomata();
+
+    nfaAutomata.network = null;
+    dfaAutomata.network = null;
+
+    dfaAutomata = new Automata("dfa");
+    nfaAutomata = new Automata("nfa");
+
+    callSnackbar("Automata saved");
 
 }
+
