@@ -31,13 +31,13 @@ function addState(automataId) {
 
         if(stateName != null){
             if(shiftKey && ctrlKey)
-                createState(definedAutomata, stateName,"IF", "#00ff99", automataId); //INITIAL FINAL
+                auxCreateState(definedAutomata, stateName,"IF", "#ccff66"); //INITIAL FINAL
             else if(shiftKey)
-                createState(definedAutomata, stateName,"F", "#00ff99", automataId); //FINAL SHIFT
+                auxCreateState(definedAutomata, stateName,"F", "#00ff99"); //FINAL SHIFT
             else if(ctrlKey)
-                createState(definedAutomata, stateName,"I", "#66a3ff", automataId); //INITIAL CONTROL
+                auxCreateState(definedAutomata, stateName,"I", "#66a3ff"); //INITIAL CONTROL
             else if(altKey)
-                createState(definedAutomata, stateName,"N", "#808080", automataId); //NORMAL ALT
+                auxCreateState(definedAutomata, stateName,"N", "#808080"); //NORMAL ALT
         }
     }
 }
@@ -50,7 +50,7 @@ function addTransition(automataId) {
         var dataArray = transitionData.split(",");
         var originState = dataArray[1];
         var nextState = dataArray[2];
-        createEdge(defineAutomata(), dataArray[0], originState, nextState, automataId);
+        auxCreateEdge(defineAutomata(), dataArray[0], originState, nextState, automataId);
     }else
         callSnackbar("Invalid input");
 
@@ -83,9 +83,8 @@ function acceptString(testString) {
 
 function convertNfaToDfa() {
 
-    console.log(nfaAutomata);
-
     nfaToDfa(nfaAutomata);
+
 }
 
 function saveAutomata(){

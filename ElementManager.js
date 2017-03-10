@@ -2,7 +2,11 @@
  * Created by mvill on 2/9/2017.
  */
 
-function createState(automata, stateName, stateType, color, automataId) {
+function auxCreateState(defineAutomata, stateName, type, color){
+    createState(defineAutomata, stateName, type, color);
+}
+
+function createState(automata, stateName, stateType, color) {
 
     var stateId = (Math.random() * 1e7).toString(32);
 
@@ -21,7 +25,6 @@ function craftNode(stateName, stateId, color, automata, isInitial, isFinal) {
     var newState;
     if(!stateExist(stateName, automata)){
         newState = new State(stateName, isInitial, isFinal, stateId);
-        console.log(newState);
         automata.stateList.push(newState);
 
         addNode(stateId, stateName, color, automata);
@@ -39,17 +42,11 @@ function addNode(stateId, stateName, color, automata) {
     init(automata);
 }
 
-function craftEdge(automata, transitionId, originState, nextState, transitionChar) {
-    var newEdge;
-
-    newEdge = new Transition(originState, nextState, transitionChar);
-    automata.transitionList.push(newEdge);
-    addNewEdge(automata, transitionId, originState, nextState, transitionChar);
-    callSnackbar("Transition " + transitionChar + ", " + originState.stateName, + ", " + nextState.stateName)
-
+function auxCreateEdge(automata, transitionChar, originState, nextState){
+    createEdge(automata, transitionChar, originState, nextState);
 }
 
-function createEdge(automata, transitionChar, originState, nextState, automataId) {
+function createEdge(automata, transitionChar, originState, nextState) {
     var transitionId = (Math.random() * 1e7).toString(32);
 
     var origin = getNode(originState, automata);
@@ -59,20 +56,30 @@ function createEdge(automata, transitionChar, originState, nextState, automataId
 
         if(document.getElementsByName('automataR')[0].checked){
             if(!edgeExists(origin, next, transitionChar, automata) && !dfaTransitionChar(origin, transitionChar, automata))
-                craftEdge(automata, transitionId, origin, next, transitionChar, automataId);
+                craftEdge(automata, transitionId, origin, next, transitionChar);
             else
                 callSnackbar("Transition already exists.");
         }
 
     else if(document.getElementsByName('automataR')[1].checked){
         if(!edgeExists(origin, next, transitionChar, automata))
-            craftEdge(automata, transitionId, origin, next, transitionChar, automataId);
+            craftEdge(automata, transitionId, origin, next, transitionChar);
         else
             callSnackbar("Transition already exists.");
     }
 
     }else
         alert("State does not exists");
+}
+
+function craftEdge(automata, transitionId, originState, nextState, transitionChar) {
+    var newEdge;
+
+    newEdge = new Transition(originState, nextState, transitionChar);
+    automata.transitionList.push(newEdge);
+    addNewEdge(automata, transitionId, originState, nextState, transitionChar);
+    callSnackbar("Transition " + transitionChar + ", " + originState.stateName, + ", " + nextState.stateName)
+
 }
     
 function addNewEdge(automata, transitionId, originState, nextState, transitionChar) {   
