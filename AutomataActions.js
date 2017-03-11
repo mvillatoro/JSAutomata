@@ -89,6 +89,8 @@ function transitionTable(automata){
 
     var stateCombinations = combination(automata.stateList);
 
+    stateCombinations = sortStateArray(stateCombinations);
+
     for(var l = 0; l < stateCombinations.length; l++){
 
         var newNode;
@@ -157,15 +159,16 @@ function transitionTable(automata){
                 for(var r = 0; r < ns.length; r++)
                     nextStatesNames +=  ns[r].stateName + ",";
 
+
+                sortStateName(nextStatesNames);
+                
+
                 mergedNextStates.push(getNode(nextStatesNames.slice(0,-1), newDfaAutomata));
             }
 
             //arr.push(arr.splice(arr.indexOf(6), 1)[0]);
 
             //mergedNextStates.push(mergedNextStates.splice(mergedNextStates.indexOf(), 1)[0]);
-
-            console.log(mergedNextStates);
-
             console.log("******************************");
 
 
@@ -180,9 +183,35 @@ function DataTable(tableData){
     this.tableStates.push(tableData);
 }
 
+function sortStateArray(stateCombinations){
 
+    var nuCombinations = [];
 
+        for(var i = 0; i < stateCombinations.length; i++){
+        var joinedStates = [];
+        var stateBulk = stateCombinations[i];
+        joinedStates = stateBulk.split(",");
+        joinedStates.sort();
+        nuCombinations[i] = joinedStates.reverse().toString();
+    }
 
+    return nuCombinations;
+}
+
+function sortStateName(stateName){
+
+    var namesArray = [];
+    var joinedNames;
+    var names = stateName.slice(0,-1);
+    namesArray = names.split(",");
+    namesArray.sort();
+    namesArray.reverse();
+    joinedNames = namesArray.join();
+
+    console.log(joinedNames);
+
+    return namesArray;
+}
 
 
 
