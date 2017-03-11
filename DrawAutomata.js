@@ -4,6 +4,7 @@
 
 var dfaAutomata = new Automata("dfa");
 var nfaAutomata = new Automata("nfa");
+var emptyA = new Automata("dfa");
 
 var savedAutomata;
 
@@ -97,7 +98,31 @@ function saveAutomata(){
     dfaAutomata = new Automata("dfa");
     nfaAutomata = new Automata("nfa");
 
+    clearDiagram();
+
     callSnackbar("Automata saved");
 
 }
 
+function loadAutomata(){
+    clearDiagram();
+    init(saveAutomata);
+}
+
+function clearDiagram(){
+
+    var container = document.getElementById('automataDiagram');
+           
+    var data = {
+        nodes: emptyA.nodes,
+        edges: emptyA.edges
+    };
+    var options = {};
+
+    dfaAutomata.network = new vis.Network(container, data, options);
+    nfaAutomata.network = new vis.Network(container, data, options);
+
+    dfaAutomata = new Automata("dfa");
+    nfaAutomata = new Automata("nfa");
+
+}

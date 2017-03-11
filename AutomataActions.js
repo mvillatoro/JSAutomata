@@ -122,28 +122,56 @@ function transitionTable(automata){
         auxCreateState(newDfaAutomata, stateName, type, color);
 
     }
+    
+    console.log(stateCombinations);
 
-    //debugger;
     for(var n = 0; n < stateCombinations.length; n++){
-        var nextStates = [];
-        var stateName = stateCombinations[n];
-        stateName = stateName.slice(0, -1);
-        var stateDataArray = stateData.split(",");
+        var rawStatesArray = [];
+        var combinedStates = [];
+        rawStates = stateCombinations[n];
+        var nextCombinedStates = [];
 
-        for(var o = 0; o < alphabet.length; o++){
-            for(var p = 0; p < stateDataArray.length; p++){
-                if(stateDataArray[p] != ""){
-                    var nuState = getNode(stateDataArray[p], automata);
-                    var newNextStates = getNextStates(nuState, alphabet[o], automata.transitionList);
-                    nextStates.push(newNextStates);
-                }
+        for(var o = 0; o < rawStates.length; o++){
+            var nuState = getNode(rawStates[o], automata);
+            if(nuState != null){
+                rawStatesArray.push(nuState);
             }
-            //function auxCreateEdge(automata, transitionChar, originState, nextState)
         }
 
-        console.log(nextStates);
+        //debugger;
 
+        for(var p = 0; p < alphabet.length; p++){
+            console.log(alphabet[p]);
+            console.log(rawStatesArray);
+
+            var mergedNextStates = [];
+
+            for(var q = 0; q < rawStatesArray.length; q++){
+                var nextStatesNames = "";
+                console.log(rawStatesArray[q]);
+                var nuNodes = getNode(rawStatesArray[q].stateName, newDfaAutomata);
+                
+                var ns = getNextStates(nuNodes, alphabet[p], automata.transitionList);
+                console.log("nextStates");
+                
+                for(var r = 0; r < ns.length; r++)
+                    nextStatesNames +=  ns[r].stateName + ",";
+
+                mergedNextStates.push(getNode(nextStatesNames.slice(0,-1), newDfaAutomata));
+            }
+
+            //arr.push(arr.splice(arr.indexOf(6), 1)[0]);
+
+            //mergedNextStates.push(mergedNextStates.splice(mergedNextStates.indexOf(), 1)[0]);
+
+            console.log(mergedNextStates);
+
+            console.log("******************************");
+
+
+        }
     }
+
     return newDfaAutomata;
 }
 
@@ -151,7 +179,6 @@ function DataTable(tableData){
     this.tableStates = [];
     this.tableStates.push(tableData);
 }
-
 
 
 
