@@ -149,6 +149,4 @@ function load(){
         auxCreateEdge(nuAutomata, edge[1], edge[0], edge[2]);
     }
 
-
-
 }

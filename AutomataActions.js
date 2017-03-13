@@ -169,8 +169,16 @@ function transitionTable(automata){
             }
 
             tempName = sortStateName(tempName);
+
+
+            //var lol = tempName;
+            //var lel = removeDuplicate(lol);
+            //console.log(lel);
+
+            var fuckingFinally = removeDuplicate(tempName);
+
             console.log("next State");
-            var trueNode = getNode(tempName, newDfaAutomata);
+            var trueNode = getNode(fuckingFinally, newDfaAutomata);
 
             var trueOriginNode =  getNode(sortStateName(stateCombinations[n]), newDfaAutomata);
 
@@ -228,14 +236,21 @@ function sortStateName(stateName){
 
 }
 
-function uniq(a) {
-    var prims = {"boolean":{}, "number":{}, "string":{}}, objs = [];
+function removeDuplicate(stringArray){
+    var data = stringArray.split(",");
 
-    return a.filter(function(item) {
-        var type = typeof item;
-        if(type in prims)
-            return prims[type].hasOwnProperty(item) ? false : (prims[type][item] = true);
-        else
-            return objs.indexOf(item) >= 0 ? false : objs.push(item);
-    });
+    var unique = new Set(data);
+
+    var unique2 = Array.from(unique);
+
+    var auxUnique2 = unique2.join();
+
+    var newUnique = sortStateArray(auxUnique2);
+    
+    console.log("fuck");
+    console.log(auxUnique2);
+
+
+    return auxUnique2;
+
 }
