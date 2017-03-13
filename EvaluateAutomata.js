@@ -7,7 +7,6 @@ function evaluateDFA(testString, automata) {
 
     for(var i = 0; i < testString.length; i++){
         currentNode = getNextState(currentNode, testString.charAt(i), automata.transitionList);
-        console.log(currentNode);
         if(currentNode == null)
             return false;
     }
@@ -41,6 +40,6 @@ function evaluateNFA(testString, automata) {
 
 function nfaToDfa(automata){
         
-    transitionTable(automata);
+    return transitionTable(automata);
 
 }

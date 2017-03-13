@@ -107,18 +107,12 @@ function transitionTable(automata){
                 
                 newNode = getNode(stateDataArray[m], automata);
 
-                if(newNode.isInitial && newNode.accepted && (type == "F" || type == "I" || type == "N" ) && newNode.stateName == stateDataArray[0]){
+                if(newNode.isInitial && newNode.accepted && (type == "F" || type == "I" || type == "N" ) && newNode.stateName == stateDataArray[0])
                     type = "IF";
-                    color = "#ccff66";
-                }
-                else if(newNode.accepted && type == "N"){
+                else if(newNode.accepted && type == "N")
                     type = "F";
-                    color = "#00ff99";
-                }
-                else if(newNode.isInitial && type == "N" && newNode.stateName == stateDataArray[0]){
-                    type = "I";
-                    color = "#66a3ff";
-                }
+                else if(newNode.isInitial && type == "N" && newNode.stateName == stateDataArray[0])
+                    type = "I"; 
             }
         }
         auxCreateState(newDfaAutomata, stateName, type, color);
@@ -128,6 +122,9 @@ function transitionTable(automata){
     console.log(stateCombinations);
 
     for(var n = 0; n < stateCombinations.length; n++){
+
+        console.log(stateCombinations[n]);
+
         var rawStatesArray = [];
         var combinedStates = [];
         rawStates = stateCombinations[n];
@@ -143,32 +140,52 @@ function transitionTable(automata){
         //debugger;
 
         for(var p = 0; p < alphabet.length; p++){
-            console.log(alphabet[p]);
-            console.log(rawStatesArray);
-
             var mergedNextStates = [];
-
             for(var q = 0; q < rawStatesArray.length; q++){
                 var nextStatesNames = "";
-                console.log(rawStatesArray[q]);
                 var nuNodes = getNode(rawStatesArray[q].stateName, newDfaAutomata);
                 
                 var ns = getNextStates(nuNodes, alphabet[p], automata.transitionList);
-                console.log("nextStates");
                 
                 for(var r = 0; r < ns.length; r++)
                     nextStatesNames +=  ns[r].stateName + ",";
 
+                var nonRepeat = nextStatesNames.split(",");
 
-                sortStateName(nextStatesNames);
-                
 
-                mergedNextStates.push(getNode(nextStatesNames.slice(0,-1), newDfaAutomata));
+
+                var stateName =  sortStateName(nextStatesNames);
+                var nuState = getNode(stateName, newDfaAutomata);
+
+                if(nuState != undefined)
+                    mergedNextStates.push(nuState);
+    
             }
 
-            //arr.push(arr.splice(arr.indexOf(6), 1)[0]);
+            var tempName = "";
 
-            //mergedNextStates.push(mergedNextStates.splice(mergedNextStates.indexOf(), 1)[0]);
+            for(var s = 0; s < mergedNextStates.length; s++){
+                tempName += mergedNextStates[s].stateName + "," ;
+            }
+
+            tempName = sortStateName(tempName);
+            console.log("next State");
+            var trueNode = getNode(tempName, newDfaAutomata);
+
+            var trueOriginNode =  getNode(sortStateName(stateCombinations[n]), newDfaAutomata);
+
+
+
+            console.log(trueOriginNode);
+            console.log(alphabet[p]);
+            console.log(trueNode);
+
+            if(trueOriginNode != undefined && trueNode != undefined){
+                 auxCreateEdge(newDfaAutomata, alphabet[p], trueOriginNode.stateName,trueNode.stateName);
+            }
+
+           
+            //auxCreateEdge(automata, transitionChar, originState, nextState)
             console.log("******************************");
 
 
@@ -207,11 +224,18 @@ function sortStateName(stateName){
     namesArray.sort();
     namesArray.reverse();
     joinedNames = namesArray.join();
+    return joinedNames;
 
-    console.log(joinedNames);
-
-    return namesArray;
 }
 
+function uniq(a) {
+    var prims = {"boolean":{}, "number":{}, "string":{}}, objs = [];
 
-
+    return a.filter(function(item) {
+        var type = typeof item;
+        if(type in prims)
+            return prims[type].hasOwnProperty(item) ? false : (prims[type][item] = true);
+        else
+            return objs.indexOf(item) >= 0 ? false : objs.push(item);
+    });
+}

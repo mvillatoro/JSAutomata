@@ -2,8 +2,17 @@
  * Created by mvill on 2/9/2017.
  */
 
-function auxCreateState(defineAutomata, stateName, type, color){
-    createState(defineAutomata, stateName, type, color);
+function auxCreateState(defineAutomata, stateName, type){
+
+    if(type == "IF")
+        createState(defineAutomata, stateName, type, "#ccff66");
+    else if(type == "F")
+        createState(defineAutomata, stateName, type, "#00ff99");
+    else if(type == "I")
+        createState(defineAutomata, stateName, type, "#66a3ff");
+    else if(type == "N")
+        createState(defineAutomata, stateName, type, "#808080");
+
 }
 
 function createState(automata, stateName, stateType, color) {

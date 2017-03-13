@@ -24,7 +24,7 @@ function addState(automataId) {
     else if(event.altKey)
         altKey = true;
 
-        var definedAutomata = defineAutomata()
+        var definedAutomata = defineAutomata();
 
     if(shiftKey || ctrlKey || altKey){
 
@@ -84,8 +84,11 @@ function acceptString(testString) {
 
 function convertNfaToDfa() {
 
-    nfaToDfa(nfaAutomata);
+    auxNfa = nfaAutomata;
 
+    clearDiagram();
+
+    dfaAutomata = nfaToDfa(auxNfa);
 }
 
 function saveAutomata(){
@@ -124,5 +127,28 @@ function clearDiagram(){
 
     dfaAutomata = new Automata("dfa");
     nfaAutomata = new Automata("nfa");
+
+}
+
+function load(){
+    var textAutomata = "a,I|b,N|c,N|d,N|e,F*a,0,a|a,0,b|a,0,c|a,0,d|a,0,e|a,1,d|a,1,e|b,0,c|b,1,e|c,1,b|d,0,e";
+    var statesTransitions = textAutomata.split("*");
+    var states = statesTransitions[0].split("|");
+
+    var transitions = statesTransitions[1].split("|");
+
+    var nuAutomata = defineAutomata();
+
+    for(var i = 0; i < states.length; i++){
+        var node = states[i].split(",");
+        auxCreateState(nuAutomata, node[0], node[1]);
+    }
+
+    for(var j = 0; j < transitions.length;j ++ ){
+        var edge = transitions[j].split(",");
+        auxCreateEdge(nuAutomata, edge[1], edge[0], edge[2]);
+    }
+
+
 
 }
