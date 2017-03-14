@@ -254,3 +254,23 @@ function removeDuplicate(stringArray){
     return auxUnique2;
 
 }
+
+function mixStates(stateA, stateB, automata){
+
+    var newType = "N";
+    var newName = stateA.stateName + stateB.stateName;
+        
+    console.log(stateA.isInitial);
+    console.log(stateB.isInitial);
+
+    if(stateA.isInitial && stateB.isInitial)
+        newType = "I";
+
+    if(stateA.accepted || stateB.accepted)
+        newType = "F";
+
+    if((stateA.isInitial && stateB.isInitial) && (stateA.accepted || stateB.accepted))
+        newType = "IF";
+
+    auxCreateState(automata, newName, newType);
+}

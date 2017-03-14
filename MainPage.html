@@ -65,8 +65,10 @@
 
     <button onclick="addTransition('automataDiagram')" >Add transition</button><br><br>
 
-    <input  type="radio" id="automataR" name="automataR" value="DFA">DFA &emsp;<br>
-    <input type="radio" id="automataR" name="automataR" value="NFA"  checked="checked">NFA<br>
+    <input  type="radio" id="automataR" name="automataR" value="DFA" checked="checked">DFA &emsp;<br>
+    <input type="radio" id="automataR" name="automataR" value="NFA">NFA<br>
+
+
     <input type="radio" id="automataR" name="automataR" value="NFAE">NFAE<br>
     <input type="radio" id="automataR" name="automataR" value="PDA">PDA<br>
     <input type="radio" id="automataR" name="automataR" value="TURING">TURING<br><br>
@@ -76,7 +78,7 @@
     <button onclick="saveAutomata()" >Save Automata</button><br>
     <button onclick="loadAutomata()" >Load Automata</button><br>
     <button onclick="clearDiagram()" >Clear</button><br><br>
-
+    <button onclick="union()" >Union</button><br><br>
 
 
     <input id="testString" type="text">

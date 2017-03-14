@@ -43,3 +43,17 @@ function nfaToDfa(automata){
     return transitionTable(automata);
 
 }
+
+function doUnion(automataA, automataB){
+
+    var automata = new Automata("dfa");
+
+    for(var i = 0; i < automataA.stateList.length; i++)
+        for(var j = 0; j < automataB.stateList.length; j++)
+            mixStates(automataA.stateList[i], automataB.stateList[j], automata);   
+
+    
+
+
+
+}

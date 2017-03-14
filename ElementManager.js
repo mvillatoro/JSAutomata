@@ -2,16 +2,16 @@
  * Created by mvill on 2/9/2017.
  */
 
-function auxCreateState(defineAutomata, stateName, type){
+function auxCreateState(automata, stateName, type){
 
     if(type == "IF")
-        createState(defineAutomata, stateName, type, "#ccff66");
+        createState(automata, stateName, type, "#ccff66");
     else if(type == "F")
-        createState(defineAutomata, stateName, type, "#00ff99");
+        createState(automata, stateName, type, "#00ff99");
     else if(type == "I")
-        createState(defineAutomata, stateName, type, "#66a3ff");
+        createState(automata, stateName, type, "#66a3ff");
     else if(type == "N")
-        createState(defineAutomata, stateName, type, "#808080");
+        createState(automata, stateName, type, "#808080");
 
 }
 

@@ -149,4 +149,24 @@ function load(aString){
         auxCreateEdge(nuAutomata, edge[1], edge[0], edge[2]);
     }
 
+    document.getElementById("automataString").value = "";
+
+}
+
+function union(){
+
+    var oldDfa = dfaAutomata;
+    var saveDfa = saveAutomata;
+    var newDfa = dfaAutomata;
+    
+    if(saveDfa.type == "nfa")
+        saveDfa = nfaToDfa(saveDfa);
+    
+    if(nfaAutomata.stateList.length != 0)
+        newDfa = nfaToDfa(nfaAutomata);
+
+    clearDiagram();
+
+    dfaAutomata = doUnion(saveAutomata, newDfa);
+
 }
