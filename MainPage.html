@@ -76,11 +76,15 @@
     <button onclick="saveAutomata()" >Save Automata</button><br>
     <button onclick="loadAutomata()" >Load Automata</button><br>
     <button onclick="clearDiagram()" >Clear</button><br><br>
-    <button onclick="load()" >Load</button><br><br>
+
+
 
     <input id="testString" type="text">
     <button onclick="acceptString(document.getElementById('testString').value)" >Test string</button><br>
 
+    <input id="automataString" type="text">
+
+    <button onclick="load(document.getElementById('automataString').value)" >Load Automata</button><br><br>
 </div>
 
 <div id="snackbar" ></div>

@@ -130,8 +130,8 @@ function clearDiagram(){
 
 }
 
-function load(){
-    var textAutomata = "a,I|b,N|c,N|d,N|e,F*a,0,a|a,0,b|a,0,c|a,0,d|a,0,e|a,1,d|a,1,e|b,0,c|b,1,e|c,1,b|d,0,e";
+function load(aString){
+    var textAutomata = aString;//"a,I|b,N|c,N|d,N|e,F*a,0,a|a,0,b|a,0,c|a,0,d|a,0,e|a,1,d|a,1,e|b,0,c|b,1,e|c,1,b|d,0,e";
     var statesTransitions = textAutomata.split("*");
     var states = statesTransitions[0].split("|");
 
