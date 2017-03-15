@@ -5,6 +5,7 @@
 var dfaAutomata = new Automata("dfa");
 var nfaAutomata = new Automata("nfa");
 var emptyA = new Automata("dfa");
+var turingAutomata = new Automata("turing");
 
 var savedAutomata;
 
@@ -45,15 +46,33 @@ function addState(automataId) {
 
 function addTransition(automataId) {
 
-    var transitionData = prompt("Define transition", "0,a,b");
+    var automata = defineAutomata();
 
-    if(transitionData != null){
-        var dataArray = transitionData.split(",");
-        var originState = dataArray[1];
-        var nextState = dataArray[2];
-        auxCreateEdge(defineAutomata(), dataArray[0], originState, nextState, automataId);
-    }else
-        callSnackbar("Invalid input");
+    if(automata.type != "turing"){
+        var transitionData = prompt("Define transition", "0,a,b");
+
+        if(transitionData != null){
+            var dataArray = transitionData.split(",");
+            var originState = dataArray[1];
+            var nextState = dataArray[2];
+            auxCreateEdge(automata, dataArray[0], originState, nextState, automataId);
+        }else
+            callSnackbar("Invalid input");  
+    }else{
+        var transitionData = prompt("Defina transition", "Origin,Tape,New Tape,Direction,Next");
+
+        if(transitionData != null){
+            var dataArray = transitionData.split(",");
+            var originState = dataArray[0];
+            var currentTape = dataArray[1];
+            var newTape = dataArray[2];
+            var direction = dataArray[3];
+            var nextState = dataArray[4]; 
+            createTuringEdge(originState, currentTape, newTape, direction,nextState, automata);
+        }else
+            callSnackbar("Invalid input");
+    }
+    
 
 }
 
@@ -63,6 +82,8 @@ function defineAutomata() {
         return dfaAutomata;
     else if(document.getElementsByName('automataR')[1].checked)
         return nfaAutomata;
+    else if(document.getElementsByName('automataR')[4].checked)
+        return turingAutomata;
     else
         alert("Not implemented");
 }
@@ -131,29 +152,35 @@ function clearDiagram(){
 }
 
 function load(aString){
+
+    var nuAutomata = defineAutomata();
     var textAutomata = aString;//"a,I|b,N|c,N|d,N|e,F*a,0,a|a,0,b|a,0,c|a,0,d|a,0,e|a,1,d|a,1,e|b,0,c|b,1,e|c,1,b|d,0,e";
     var statesTransitions = textAutomata.split("*");
     var states = statesTransitions[0].split("|");
-
     var transitions = statesTransitions[1].split("|");
-
-    var nuAutomata = defineAutomata();
 
     for(var i = 0; i < states.length; i++){
         var node = states[i].split(",");
         auxCreateState(nuAutomata, node[0], node[1]);
     }
 
-    for(var j = 0; j < transitions.length;j ++ ){
-        var edge = transitions[j].split(",");
-        auxCreateEdge(nuAutomata, edge[1], edge[0], edge[2]);
+    if(nuAutomata.type == "turing")
+        for(var k = 0; k < transitions.length;k++){
+            var edge = transitions[k].split(",");
+            createTuringEdge(edge[0], edge[1], edge[2], edge[3], edge[4], nuAutomata);
+        }   
+    else{
+        for(var j = 0; j < transitions.length;j ++ ){
+            var edge = transitions[j].split(",");
+            auxCreateEdge(nuAutomata, edge[1], edge[0], edge[2]);
+        }
     }
 
     document.getElementById("automataString").value = "";
 
 }
 
-function union(){
+function makeUnion(){
 
     var oldDfa = dfaAutomata;
     var saveDfa = saveAutomata;
@@ -167,6 +194,8 @@ function union(){
 
     clearDiagram();
 
-    dfaAutomata = doUnion(saveAutomata, newDfa);
+    //dfaAutomata = doUnion(saveAutomata, newDfa);
+
+    dfaAutomata = union(saveAutomata, newDfa);
 
 }

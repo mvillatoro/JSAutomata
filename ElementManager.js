@@ -51,6 +51,64 @@ function addNode(stateId, stateName, color, automata) {
     init(automata);
 }
 
+function createTuringEdge(originState, tape, newTape, direction, nextState, automata){
+    //"Origin, Tape, New Tape, Direction, Next"
+    var transitionId = (Math.random() * 1e7).toString(32);
+    var origin = getNode(originState, automata);
+    var next = getNode(nextState, automata);
+
+    if(origin != null && next != null){
+        if(!turingEdgeExists(origin, tape, newTape, direction, next, automata))
+            craftTuringEdge(origin, tape, newTape, direction, next, automata, transitionId);
+        else
+            callSnackbar("Transition already exists.");
+    }else
+        alert("State does not exists");
+
+}
+
+function craftTuringEdge(originState, tape, newTape, direction, nextState, automata, transitionId){
+    var newEdge;
+    newEdge = new TuringTransition(originState, tape, newTape, direction, nextState);
+    automata.transitionList.push(newEdge);
+
+    var arrow;
+
+    if(direction == "R")
+        arrow = "→";
+    else if(direction == "L")
+        arrow = "←";
+
+    var transitionText = tape + " /" + newTape + "," + arrow;
+    addNewTuringEdge(automata, transitionId, originState, nextState, transitionText);
+    callSnackbar("Transition " + transitionText + "," + originState.stateName + ", " + nextState.stateName);
+
+}
+
+function addNewTuringEdge(automata, transitionId, originState, nextState, transitionText){
+    automata.edges.push({
+        id: transitionId,
+        from: originState.stateId,
+        to: nextState.stateId,
+        label: transitionText,
+        color:{color:'rgba(30,30,30,0.2)', highlight:'blue'},
+        arrows:'to' 
+    });
+
+    init(automata);
+}
+
+function turingEdgeExists(origin, tape, newTape, direction, next, automata){
+    
+    var newEdge = new TuringTransition(origin, tape, newTape, direction, next);
+
+    for(var i = 0; i < automata.transitionList.length; i++)
+        if(newEdge === automata.transitionList[i])
+            return true;
+
+    return false;
+}
+
 function auxCreateEdge(automata, transitionChar, originState, nextState){
     createEdge(automata, transitionChar, originState, nextState);
 }
@@ -87,7 +145,7 @@ function craftEdge(automata, transitionId, originState, nextState, transitionCha
     newEdge = new Transition(originState, nextState, transitionChar);
     automata.transitionList.push(newEdge);
     addNewEdge(automata, transitionId, originState, nextState, transitionChar);
-    callSnackbar("Transition " + transitionChar + ", " + originState.stateName, + ", " + nextState.stateName)
+    callSnackbar("Transition " + transitionChar + ", " + originState.stateName + ", " + nextState.stateName)
 
 }
     

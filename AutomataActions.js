@@ -255,22 +255,79 @@ function removeDuplicate(stringArray){
 
 }
 
-function mixStates(stateA, stateB, automata){
+function mixStates(automata, automataA, automataB){
 
-    var newType = "N";
-    var newName = stateA.stateName + stateB.stateName;
-        
-    console.log(stateA.isInitial);
-    console.log(stateB.isInitial);
+    var newType;
+    var newName; //stateA.stateName + stateB.stateName;
 
-    if(stateA.isInitial && stateB.isInitial)
-        newType = "I";
+    var alphabetA = getAlphabet(automataA.transitionList);
+    var alphabetB = getAlphabet(automataB.transitionList);
+    
+    for (var i = 0; i < automataA.stateList.length; i++){
+        for (var j = 0; j < automataB.stateList.length; j++){
+            
+            newName = [];
+            newType = "N";
+            
+            var nextState = [];
+            var stateA = automataA.stateList[i];
+            var stateB = automataB.stateList[j];
 
-    if(stateA.accepted || stateB.accepted)
-        newType = "F";
+            var transitionResult = [];
 
-    if((stateA.isInitial && stateB.isInitial) && (stateA.accepted || stateB.accepted))
-        newType = "IF";
 
-    auxCreateState(automata, newName, newType);
+
+
+
+            newName.push(stateA.stateName);
+            newName.push(stateB.stateName); 
+
+            newname = newName.sort();
+            newName = newName.join("");
+            if(stateA.isInitial && stateB.isInitial)
+                newType = "I";
+
+            if(stateA.accepted || stateB.accepted)
+                newType = "F";
+
+            if((stateA.isInitial && stateB.isInitial) && (stateA.accepted || stateB.accepted))
+                newType = "IF";
+
+            auxCreateState(automata, newName, newType);
+        }
+    }
+
+    
+
+
+}
+
+function union(dfa1, dfa2) {
+    function destinations(from, c) {
+        const dfaStates = dfa1.states[from] || {};
+        const dfa2States = dfa2.states[from] || {};
+        return [dfaStates[c] || null, dfa2States[c] || null];
+    }
+
+    function move(s, c) {
+        const result = [];
+        s.forEach(x => destinations(x, c).forEach(d => result.push(d)));
+        return result;
+    }
+
+    const initial = [dfa1.start, dfa2.start];
+
+    const result = _product(dfa1, dfa2, initial);
+    const finals = [];
+    Object.keys(result).forEach(state => {
+        if (state.split(",").some(x => dfa1.final.includes(x) || dfa2.final.includes(x))) {
+            finals.push(state);
+        }
+    });
+
+    return Dfa({
+        start: initial.sort().join(","),
+        final: finals,
+        states: result
+    });
 }

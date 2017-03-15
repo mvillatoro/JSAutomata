@@ -6,5 +6,4 @@ function Transition(originState, nextState, transitionChar) {
     this.originState = originState;
     this.nextState =  nextState;
     this.transitionChar = transitionChar;
-    //this.transitionName = "";
 }
