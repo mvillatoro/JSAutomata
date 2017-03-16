@@ -97,11 +97,14 @@ function acceptString(testString, turingTape) {
     else if(automata.type == "turing")
         result = evaluateTuring(testString, turingTape, automata);
     
-    if(result)
+    if(result == true)
         alert("The string was accepted! :D");
     else
         if(automata.type != "turing")
             alert("The string was NOT accepted :(");
+
+    if(automata.type == "turing")
+        alert("Tape: " + result);
 }
 
 function convertNfaToDfa() {

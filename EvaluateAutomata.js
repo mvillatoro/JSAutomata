@@ -54,10 +54,10 @@ function doUnion(automataA, automataB){
 }
 
 function evaluateTuring(testString, turingTape, automata){
-    //alert(testString + " " + turingTape + " " + automata.type);
+
+    var breakloop = 0;
 
     var arrayTape = testString.split("");
-    //var arrayTape = ["B", "B"];
     arrayTape.push("B");
     arrayTape.unshift("B");
     var newTuple = [];
@@ -70,10 +70,7 @@ function evaluateTuring(testString, turingTape, automata){
 
     var currentState = getInitialNode(automata.stateList);
 
-    var i = 0;
-
-    if(arrayTape[0] == "B")
-        i = 1;
+    var i = 1;
 
     var loop = true;
     while(loop){
@@ -88,13 +85,24 @@ function evaluateTuring(testString, turingTape, automata){
             else
                 i--;
 
-            if(currentState.accepted)
+            if(currentState.accepted){
                 loop = false;
+            }
+                
+
         }
 
-        console.log(loop);
+        breakloop++;
+
+        if(breakloop == 500){
+            loop = false;
+            alert("Loops infinitely");
+        }
+            
     }
     console.log("after");
     console.log(arrayTape);
+
+    return arrayTape;
 
 }
