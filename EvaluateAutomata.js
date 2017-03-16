@@ -52,3 +52,53 @@ function doUnion(automataA, automataB){
 
 
 }
+
+function evaluateTuring(testString, turingTape, automata){
+    //alert(testString + " " + turingTape + " " + automata.type);
+
+    var arrayTape = testString.split("");
+    //var arrayTape = ["B", "B"];
+    arrayTape.push("B");
+    arrayTape.unshift("B");
+    var newTuple = [];
+
+    if(turingTape.length != 0 )
+        var arrayTape = turingTape.split("");
+
+    console.log("before");
+    console.log(arrayTape);
+
+    var currentState = getInitialNode(automata.stateList);
+
+    var i = 0;
+
+    if(arrayTape[0] == "B")
+        i = 1;
+
+    var loop = true;
+    while(loop){
+        newTuple = getNextTuringState(currentState, arrayTape[i], automata.transitionList);
+        
+        if(newTuple != undefined){
+            arrayTape[i] = newTuple[0];
+            currentState = newTuple[1];
+            
+            
+
+            console.log(newTuple);
+
+            if(newTuple[2] == 1)
+                i++;
+            else
+                i--;
+
+            if(currentState.accepted)
+                loop = false;
+        }
+
+        console.log(loop);
+    }
+    console.log("after");
+    console.log(arrayTape);
+
+}

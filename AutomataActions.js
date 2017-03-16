@@ -331,3 +331,20 @@ function union(dfa1, dfa2) {
         states: result
     });
 }
+
+function getNextTuringState(currentState, tape, transitionList){
+
+    var newTuple = [];
+
+    for(var i = 0; i < transitionList.length; i++){
+        if(transitionList[i].origin == currentState && transitionList[i].tape == tape){
+            newTuple.push(transitionList[i].newTape);
+            newTuple.push(transitionList[i].next);
+            if(transitionList[i].direction == "R")
+                newTuple.push(1);
+            else
+                newTuple.push(0);
+            return newTuple;
+        }
+    }
+}

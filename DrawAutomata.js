@@ -88,7 +88,7 @@ function defineAutomata() {
         alert("Not implemented");
 }
 
-function acceptString(testString) {
+function acceptString(testString, turingTape) {
     var result;
     var automata =  defineAutomata();
 
@@ -96,6 +96,8 @@ function acceptString(testString) {
         result =  evaluateDFA(testString,automata);
     else if(automata.type == "nfa")
         result = evaluateNFA(testString, automata);
+    else if(automata.type == "turing")
+        result = evaluateTuring(testString, turingTape, automata);
     
     if(result)
         alert("The string was accepted! :D");
@@ -110,6 +112,10 @@ function convertNfaToDfa() {
     clearDiagram();
 
     dfaAutomata = nfaToDfa(auxNfa);
+
+    document.getElementById("nfa2dfa").style.display = 'none';
+    document.getElementsByName('automataR')[0].checked = "true";
+
 }
 
 function saveAutomata(){
