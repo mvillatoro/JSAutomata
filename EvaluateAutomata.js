@@ -82,10 +82,6 @@ function evaluateTuring(testString, turingTape, automata){
         if(newTuple != undefined){
             arrayTape[i] = newTuple[0];
             currentState = newTuple[1];
-            
-            
-
-            console.log(newTuple);
 
             if(newTuple[2] == 1)
                 i++;

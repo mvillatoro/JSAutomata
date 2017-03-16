@@ -9,8 +9,6 @@ var turingAutomata = new Automata("turing");
 
 var savedAutomata;
 
-//dvchm
-
 function addState(automataId) {
     var shiftKey = false;
     var ctrlKey = false;
@@ -102,7 +100,8 @@ function acceptString(testString, turingTape) {
     if(result)
         alert("The string was accepted! :D");
     else
-        alert("The string was NOT accepted :(");
+        if(automata.type != "turing")
+            alert("The string was NOT accepted :(");
 }
 
 function convertNfaToDfa() {

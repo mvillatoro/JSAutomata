@@ -9,4 +9,6 @@ x,I|y,N|z,F*x,b,z|x,a,y|y,b,x|y,a,z|z,b,y|z,a,x
 //TURING
 a,I|b,N|c,N|h,F*a,0,P,R,b|a,1,P,L,c|b,1,P,R,b|b,0,P,L,a|c,0,P,L,b|c,1,P,R,h
 
-a,I|b,N|c,N|d,F*a,0,1,R,a|a,B,B,R,b|b,1,1,L,b|b,B,B,R,c|c,0,0,R,c|c,B,B,R,d
+a,I|b,N|c,N|d,F*a,0,1,R,a|a,B,B,L,b|b,1,1,L,b|b,B,B,R,c|c,1,1,R,c|c,B,B,R,d
+
+a,I|b,N|c,N|d,N|e,N|f,F*a,0,x,R,b|b,0,0,R,b|b,1,y,L,c|c,y,y,L,c|c,0,0,L,d|d,x,x,R,a|d,0,0,L,d|c,x,x,R,e|e,y,y,R,e|e,B,B,L,f
