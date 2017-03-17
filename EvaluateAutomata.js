@@ -48,7 +48,7 @@ function doUnion(automataA, automataB){
 
     var automata = new Automata("dfa");
 
-    mixStates(automata, automataA, automataB);
+   return mixStates(automata, automataA, automataB);
 
 
 }

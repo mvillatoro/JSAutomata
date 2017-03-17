@@ -87,6 +87,8 @@ function defineAutomata() {
 }
 
 function acceptString(testString, turingTape) {
+    debugger
+    
     var result;
     var automata =  defineAutomata();
 
@@ -100,8 +102,7 @@ function acceptString(testString, turingTape) {
     if(result == true)
         alert("The string was accepted! :D");
     else
-        if(automata.type != "turing")
-            alert("The string was NOT accepted :(");
+        alert("The string was NOT accepted :(");
 
     if(automata.type == "turing")
         alert("Tape: " + result);
@@ -204,6 +205,6 @@ function makeUnion(){
 
     //dfaAutomata = doUnion(saveAutomata, newDfa);
 
-    dfaAutomata = union(saveAutomata, newDfa);
+    dfaAutomata = doUnion(saveAutomata, newDfa);
 
 }

@@ -260,6 +260,8 @@ function mixStates(automata, automataA, automataB){
     var newType;
     var newName; //stateA.stateName + stateB.stateName;
 
+
+
     var alphabetA = getAlphabet(automataA.transitionList);
     var alphabetB = getAlphabet(automataB.transitionList);
     
@@ -275,14 +277,10 @@ function mixStates(automata, automataA, automataB){
 
             var transitionResult = [];
 
-
-
-
-
             newName.push(stateA.stateName);
             newName.push(stateB.stateName); 
 
-            newname = newName.sort();
+            //newname = newName.sort();
             newName = newName.join("");
             if(stateA.isInitial && stateB.isInitial)
                 newType = "I";
@@ -294,42 +292,62 @@ function mixStates(automata, automataA, automataB){
                 newType = "IF";
 
             auxCreateState(automata, newName, newType);
+
         }
     }
 
-    
+    for (var l = 0; l < automataA.stateList.length; l++){
+        for (var m = 0; m < automataB.stateList.length; m++){
+            
+            var stateA = automataA.stateList[l];
+            var stateB = automataB.stateList[m];
+            
+            var lol = stateA.stateName + stateB.stateName;
 
+            var fuck = getNode(lol, automata);
+
+            
+            for(var k = 0; k < alphabetA.length; k++){
+                var nextA =  getNextState(stateA, alphabetA[k], automataA.transitionList);
+                var nextB =  getNextState(stateB, alphabetA[k], automataB.transitionList);
+                
+                var next = fuseStates(nextA, nextB, automata)
+                
+                console.log(stateA);
+                console.log(stateB);
+                
+                console.log(nextA);
+                console.log(nextB);
+                console.log(alphabetA[k]);
+                console.log(fuseStates(nextA, nextB, automata));
+                console.log("*******************");
+            
+        //automata, transitionChar, originState, nextState
+                auxCreateEdge(automata,alphabetA[k], fuck.stateName, next.stateName);
+            }
+
+            
+
+        }
+    }
+
+    return automata;
 
 }
 
-function union(dfa1, dfa2) {
-    function destinations(from, c) {
-        const dfaStates = dfa1.states[from] || {};
-        const dfa2States = dfa2.states[from] || {};
-        return [dfaStates[c] || null, dfa2States[c] || null];
-    }
+function fuseStates(stateA, stateB, automata){
+    var newName = []
+    newName.push(stateA.stateName);
+    newName.push(stateB.stateName);
 
-    function move(s, c) {
-        const result = [];
-        s.forEach(x => destinations(x, c).forEach(d => result.push(d)));
-        return result;
-    }
+    //newname = newName.sort();
+    newName = newName.join("");
 
-    const initial = [dfa1.start, dfa2.start];
 
-    const result = _product(dfa1, dfa2, initial);
-    const finals = [];
-    Object.keys(result).forEach(state => {
-        if (state.split(",").some(x => dfa1.final.includes(x) || dfa2.final.includes(x))) {
-            finals.push(state);
-        }
-    });
+    console.log(newName);
+    var lol = getNode(newName, automata);
+    return lol;
 
-    return Dfa({
-        start: initial.sort().join(","),
-        final: finals,
-        states: result
-    });
 }
 
 function getNextTuringState(currentState, tape, transitionList){
