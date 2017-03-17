@@ -366,3 +366,84 @@ function getNextTuringState(currentState, tape, transitionList){
         }
     }
 }
+
+function mixStates2(automata, automataA, automataB){
+
+    var newType;
+    var newName; //stateA.stateName + stateB.stateName;
+
+
+
+    var alphabetA = getAlphabet(automataA.transitionList);
+    var alphabetB = getAlphabet(automataB.transitionList);
+    
+    for (var i = 0; i < automataA.stateList.length; i++){
+        for (var j = 0; j < automataB.stateList.length; j++){
+            
+            newName = [];
+            newType = "N";
+            
+            var nextState = [];
+            var stateA = automataA.stateList[i];
+            var stateB = automataB.stateList[j];
+
+            var transitionResult = [];
+
+            newName.push(stateA.stateName);
+            newName.push(stateB.stateName); 
+
+            //newname = newName.sort();
+            newName = newName.join("");
+            if(stateA.isInitial && stateB.isInitial)
+                newType = "I";
+
+            if(stateA.accepted && stateB.accepted)
+                newType = "F";
+
+            if((stateA.isInitial && stateB.isInitial) && (stateA.accepted || stateB.accepted))
+                newType = "IF";
+
+            auxCreateState(automata, newName, newType);
+
+        }
+    }
+
+    for (var l = 0; l < automataA.stateList.length; l++){
+        for (var m = 0; m < automataB.stateList.length; m++){
+            
+            var stateA = automataA.stateList[l];
+            var stateB = automataB.stateList[m];
+            
+            var lol = stateA.stateName + stateB.stateName;
+
+            var fuck = getNode(lol, automata);
+
+            
+            for(var k = 0; k < alphabetA.length; k++){
+                var nextA =  getNextState(stateA, alphabetA[k], automataA.transitionList);
+                var nextB =  getNextState(stateB, alphabetA[k], automataB.transitionList);
+                
+                var next = fuseStates(nextA, nextB, automata)
+                
+                console.log(stateA);
+                console.log(stateB);
+                
+                console.log(nextA);
+                console.log(nextB);
+                console.log(alphabetA[k]);
+                console.log(fuseStates(nextA, nextB, automata));
+                console.log("*******************");
+            
+        //automata, transitionChar, originState, nextState
+                auxCreateEdge(automata,alphabetA[k], fuck.stateName, next.stateName);
+            }
+
+            
+
+        }
+    }
+
+    return automata;
+
+}
+

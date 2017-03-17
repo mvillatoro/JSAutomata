@@ -45,12 +45,15 @@ function nfaToDfa(automata){
 }
 
 function doUnion(automataA, automataB){
-
     var automata = new Automata("dfa");
 
    return mixStates(automata, automataA, automataB);
+}
 
+function doIntersection(automataA, automataB){
+    var automata = new Automata("dfa");
 
+    return mixStates2(automata, automataA, automataB);
 }
 
 function evaluateTuring(testString, turingTape, automata){

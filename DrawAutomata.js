@@ -208,3 +208,23 @@ function makeUnion(){
     dfaAutomata = doUnion(saveAutomata, newDfa);
 
 }
+
+function makeIntersection(){
+    
+    var oldDfa = dfaAutomata;
+    var saveDfa = saveAutomata;
+    var newDfa = dfaAutomata;
+    
+    if(saveDfa.type == "nfa")
+        saveDfa = nfaToDfa(saveDfa);
+    
+    if(nfaAutomata.stateList.length != 0)
+        newDfa = nfaToDfa(nfaAutomata);
+
+    clearDiagram();
+
+    //dfaAutomata = doUnion(saveAutomata, newDfa);
+
+    dfaAutomata = doIntersection(saveAutomata, newDfa);
+
+}
