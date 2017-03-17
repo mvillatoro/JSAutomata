@@ -63,6 +63,10 @@
 
     <div id="automataDiagram" style="border: solid 2px black; width:100%; height: 400px; background-color: white" align="center"  onclick="addState('automataDiagram')" ></div>
 
+    <input id="automataString" type="text">
+
+    <button onclick="load(document.getElementById('automataString').value)" >Load Automata</button><br><br>
+
     <button onclick="addTransition('automataDiagram')" >Add transition</button><br><br>
     <input  type="radio" id="automataR" name="automataR" value="DFA"  checked="checked" >DFA<br>
 
@@ -76,10 +80,10 @@
     <input type="radio" id="automataR" name="automataR" value="NFA" >NFA<br>
     
     <div id="nfa2dfa" style="display: none">
+        &emsp;&emsp;<input type="checkbox" id="NFAE" value="NFAE">Epsilon<br>
         &emsp;&emsp;<button  onclick="convertNfaToDfa()"  >NFA -> DFA</button><br>
     </div>
 
-    <input type="radio" id="automataR" name="automataR" value="NFAE">NFAE<br>
     <input type="radio" id="automataR" name="automataR" value="PDA">PDA<br>
     <input type="radio" id="automataR" name="automataR" value="TURING">TURING<br>
 
@@ -93,10 +97,6 @@
 
     <input id="testString" type="text">
     <button onclick="acceptString(document.getElementById('testString').value, document.getElementById('turingTape').value)" >Test string</button><br>
-
-    <input id="automataString" type="text">
-
-    <button onclick="load(document.getElementById('automataString').value)" >Load Automata</button><br><br>
 </div>
 
 <div id="snackbar" ></div>
@@ -111,26 +111,18 @@
             document.getElementById("nfa2dfa").style.display = 'none';
             document.getElementById("tape").style.display = 'none';
             document.getElementById("nfaDiv").style.display = 'block';
-
     };
-
     document.getElementsByName('automataR')[1].onclick = function() {
         document.getElementById("nfa2dfa").style.display = 'block';
         document.getElementById("tape").style.display = 'none';
         document.getElementById("nfaDiv").style.display = 'none';
     };
-
     document.getElementsByName('automataR')[2].onclick = function() {
         document.getElementById("nfa2dfa").style.display = 'none';
         document.getElementById("tape").style.display = 'none';
         document.getElementById("nfaDiv").style.display = 'none';
     };
     document.getElementsByName('automataR')[3].onclick = function() {
-        document.getElementById("nfa2dfa").style.display = 'none';
-        document.getElementById("tape").style.display = 'none';
-        document.getElementById("nfaDiv").style.display = 'none';
-    };
-    document.getElementsByName('automataR')[4].onclick = function() {
         document.getElementById("nfa2dfa").style.display = 'none';
         document.getElementById("tape").style.display = 'block';
         document.getElementById("nfaDiv").style.display = 'none';

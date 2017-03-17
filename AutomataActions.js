@@ -137,8 +137,6 @@ function transitionTable(automata){
             }
         }
 
-        //debugger;
-
         for(var p = 0; p < alphabet.length; p++){
             var mergedNextStates = [];
             for(var q = 0; q < rawStatesArray.length; q++){
@@ -485,4 +483,38 @@ function chkTransitions(oldAutomata, automata){
 
         }
    }
+}
+
+function closure(states, transitionList){
+/*
+    var closuredStates = [];
+    closuredStates.push(state);
+
+    var next = getNextStates(state, "E", transitionList);
+
+    if(next != null)
+        for(var i = 0; i < next.length; i++)
+            closuredStates.push(next[i]);
+*/
+
+    
+
+}
+
+function clausura(fromStates, transitionList) {
+    var queue = Array(...fromStates);//State(...fromStates);
+    var result = Array(...fromStates);//State(...fromStates);
+
+    while(queue.length != 0) {
+        var next = queue.pop();
+        var destinies = getNextStates(next,"E", transitionList);//getDestinies({for: next, on: EPSILON});
+        for(destiny of destinies) {
+            if (!result.includes(destiny)) {
+                result.push(destiny);
+                queue.push(destiny);
+            }
+        }
+    }
+
+    return result;
 }

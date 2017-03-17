@@ -44,6 +44,81 @@ function nfaToDfa(automata){
 
 }
 
+function evaluateNFAE(testString, automata){
+    
+    var currentList = [];
+    currentList = getInitialNodes(automata.stateList);
+
+    for(var  i = 0; i < testString.length; i++){
+        var tempList = [];
+        for(var j = 0; j < currentList.length; j++){
+            var states = getNextStates(currentList[j], testString.charAt(i), automata.transitionList);
+            
+            var closuredStates = [];
+
+            var nuNextStates = closure(states, automata.transitionList);
+
+
+            for(var n = 0; n < nuNextStates.length; n++){
+                closuredStates.push(nuNextStates[n]);
+                i--;       
+            }
+            
+            tempList.push.apply(tempList, closuredStates);
+        }
+
+        currentList.length = 0;
+
+
+
+        for(var l = 0; l < tempList.length; l++){
+            //console.log(tempList[l]);
+            currentList.push(tempList[l]);
+        }
+            
+            console.log(currentList);
+    }
+
+    for(var k = 0; k < currentList.length; k++)
+        if(currentList[k].accepted)
+            return true;
+
+    return false;
+
+}
+
+function evaluarNFAE(str, automata) {
+    var current = getInitialNodes(automata.stateList);
+    current = clausura(current, automata.transitionList);
+
+    for(c of str) {
+        
+        if(!current)
+            return false;
+
+        var next = [];
+
+        for(state of current){
+            var nextStates = getNextStates(state,c,automata.transitionList);
+            for(ns of nextStates){
+                next.push(ns);
+            }
+        }
+
+        current =next;
+             
+
+
+        current = clausura(current, automata.transitionList);
+    }
+
+    for(state of current)
+        if(state.accepted)
+            return true;
+            
+    return false;
+}
+
 function doUnion(automataA, automataB){
     var automata = new Automata("dfa");
 

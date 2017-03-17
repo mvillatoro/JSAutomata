@@ -80,7 +80,7 @@ function defineAutomata() {
         return dfaAutomata;
     else if(document.getElementsByName('automataR')[1].checked)
         return nfaAutomata;
-    else if(document.getElementsByName('automataR')[4].checked)
+    else if(document.getElementsByName('automataR')[3].checked)
         return turingAutomata;
     else
         alert("Not implemented");
@@ -88,19 +88,24 @@ function defineAutomata() {
 
 function acceptString(testString, turingTape) {
 
-    var result;
+    var result = false;
     var automata =  defineAutomata();
 
     if(automata.type == "dfa")
         result =  evaluateDFA(testString,automata);
+    else if(automata.type == "nfa" && document.getElementById("NFAE").checked == true){
+        //result = evaluateNFAE(testString, automata);
+        result = evaluarNFAE(testString, automata);
+    }
     else if(automata.type == "nfa")
         result = evaluateNFA(testString, automata);
     else if(automata.type == "turing")
         result = evaluateTuring(testString, turingTape, automata);
     
+
     if(result == true)
         alert("The string was accepted! :D");
-    else
+    else if(!result && automata.type != "turing")
         alert("The string was NOT accepted :(");
 
     if(automata.type == "turing")
@@ -229,14 +234,6 @@ function makeIntersection(){
 }
 
 function makeCompliment(){
-/*
-    var oldDfa = dfaAutomata;
-
-    var automata =  defineAutomata();
-
-    if(automata.type == "nfa")
-        automata = nfaToDfa(nfaAutomata);
-*/
 
     oldDfa = dfaAutomata;
 
@@ -245,3 +242,4 @@ function makeCompliment(){
     dfaAutomata = doCompliment(oldDfa);
 
 }
+

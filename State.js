@@ -7,4 +7,7 @@ function State(name, isInitial, accepted, stateId) {
     this.isInitial = isInitial;
     this.accepted = accepted;
     this.stateId = stateId;
+
+    State.prototype.isEmpty = () => this.lenght == 0;
+
 }

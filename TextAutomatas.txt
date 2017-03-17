@@ -1,12 +1,17 @@
-//NFA
-a,I|b,N|c,N|d,N|e,F*a,0,a|a,0,b|a,0,c|a,0,d|a,0,e|a,1,d|a,1,e|b,0,c|b,1,e|c,1,b|d,0,e
-
 //DFA
 1,I|2,F*1,a,1|1,b,2|2,b,1|2,a,2
 
 1,I|2,N|3,F*1,b,3|1,a,2|2,b,2|2,a,3|3,b,2|3,a,1
 
 a,I|b,F*a,0,b|a,1,a
+
+//NFA
+a,I|b,N|c,N|d,N|e,F*a,0,a|a,0,b|a,0,c|a,0,d|a,0,e|a,1,d|a,1,e|b,0,c|b,1,e|c,1,b|d,0,e
+
+//NFA-E
+a,I|b,N|c,F*a,a,b|b,E,c|c,b,c
+
+a,I|b,N|c,F*a,b,a|a,E,b|b,a,b|b,E,c|c,a,b|c,b,a
 
 //TURING
 a,I|b,N|c,N|h,F*a,0,P,R,b|a,1,P,L,c|b,1,P,R,b|b,0,P,L,a|c,0,P,L,b|c,1,P,R,h
@@ -24,12 +29,15 @@ NFA
 NFA -> DFA
 OPERACIONES
 TURING
-
 NFAE
-REGEX
-REGEX -> Automata
-Automata -> REGEX
+
 PDA
+MINIMIZACION
+
+REGEX
+Automata -> REGEX
 GRAMATICA
+
+REGEX -> Automata
 PDA -> GRAMATICA
 GRAMATICA -> PDA
