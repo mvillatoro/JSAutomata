@@ -109,3 +109,13 @@ function evaluateTuring(testString, turingTape, automata){
     return arrayTape;
 
 }
+
+function doCompliment(automata){
+    
+    var nuAutomata = new Automata("dfa");
+
+    toggleState(automata.stateList, nuAutomata);
+    chkTransitions(automata, nuAutomata);
+
+    return nuAutomata;
+}

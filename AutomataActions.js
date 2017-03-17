@@ -447,3 +447,42 @@ function mixStates2(automata, automataA, automataB){
 
 }
 
+function toggleState(stateList, automata){
+    var type;
+
+    for(var i = 0; i < stateList.length; i++){
+        if(stateList[i].accepted && stateList[i].isInitial)
+            type = "I";
+        else if(!stateList[i].accepted && stateList[i].isInitial)
+           type = "IF";
+        else if(stateList[i].accepted)
+            type = "N";
+        else if(!stateList[i].accepted && !stateList[i].isInitial)
+            type = "F";
+
+        auxCreateState(automata, stateList[i].stateName, type);
+    }
+}
+
+function chkTransitions(oldAutomata, automata){
+    
+    var alphabet = getAlphabet(oldAutomata.transitionList);
+
+    for(var i = 0; i < oldAutomata.stateList.length; i++){
+        for(var j = 0; j < alphabet.length; j++){
+            var nextState = getNextState(oldAutomata.stateList[i], alphabet[j], oldAutomata.transitionList);
+            var newOrigin = getNode(oldAutomata.stateList[i].stateName, automata);
+
+            if(nextState != null){ 
+                var newNext = getNode(nextState.stateName, automata);
+                auxCreateEdge(automata, alphabet[j], newOrigin.stateName, newNext.stateName);
+            }else{
+                auxCreateState(automata, "Sumidero", "F");
+                var sumidero = getNode("Sumidero", automata);
+                auxCreateEdge(automata, alphabet[j], newOrigin.stateName, sumidero.stateName);
+                auxCreateEdge(automata, alphabet[j], sumidero.stateName, sumidero.stateName);
+            }
+
+        }
+   }
+}

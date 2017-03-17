@@ -87,8 +87,7 @@ function defineAutomata() {
 }
 
 function acceptString(testString, turingTape) {
-    debugger
-    
+
     var result;
     var automata =  defineAutomata();
 
@@ -225,6 +224,24 @@ function makeIntersection(){
 
     //dfaAutomata = doUnion(saveAutomata, newDfa);
 
-    dfaAutomata = doIntersection(saveAutomata, newDfa);
+    dfaAutomata = doIntersection    (saveAutomata, newDfa);
+
+}
+
+function makeCompliment(){
+/*
+    var oldDfa = dfaAutomata;
+
+    var automata =  defineAutomata();
+
+    if(automata.type == "nfa")
+        automata = nfaToDfa(nfaAutomata);
+*/
+
+    oldDfa = dfaAutomata;
+
+    clearDiagram();
+
+    dfaAutomata = doCompliment(oldDfa);
 
 }
