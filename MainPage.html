@@ -78,7 +78,7 @@
     <button onclick="load(document.getElementById('automataString').value)" >Load Automata</button><br><br>
 
     <button onclick="addTransition('automataDiagram')" >Add transition</button><br><br>
-    <input  type="radio" id="automataR" name="automataR" value="DFA"  checked="checked" >DFA<br>
+    <input  type="radio" id="automataR" name="automataR" value="DFA" >DFA<br>
 
     <div id = "nfaDiv">
         &emsp;&emsp;<button onclick="makeUnion()" >Union</button><br>
@@ -94,7 +94,7 @@
         &emsp;&emsp;<button  onclick="convertNfaToDfa()"  >NFA -> DFA</button><br>
     </div>
 
-    <input type="radio" id="automataR" name="automataR" value="PDA">PDA<br>
+    <input type="radio" id="automataR" name="automataR" value="PDA"   checked="checked" >PDA<br>
     <input type="radio" id="automataR" name="automataR" value="TURING">TURING<br>
 
     <div id = "tape" style="display: none">
@@ -130,7 +130,6 @@
         document.getElementById("nfa2dfa").style.display = 'none';
         document.getElementById("tape").style.display = 'none';
         document.getElementById("nfaDiv").style.display = 'none';
-            document.getElementById("EdgeInfo").style.display = 'block';
     };
     document.getElementsByName('automataR')[3].onclick = function() {
         document.getElementById("nfa2dfa").style.display = 'none';
@@ -142,6 +141,7 @@
 
 <script src="TestFunctions.js"></script>
 <script src="State.js"></script>
+<script src="PdaTransition.js"></script>
 <script src="Transition.js"></script>
 <script src="TuringTransition.js"></script>
 <script src="Automata.js"></script>

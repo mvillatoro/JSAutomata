@@ -25,7 +25,7 @@ a,I|b,N|c,N|d,N|e,F|f,N*a,0,x,R,b|b,0,0,R,b|b,1,y,L,c|c,y,y,L,f|f,0,0,L,f|f,x,x,
 
 
 
-79097909
+
 
 DFA
 NFA

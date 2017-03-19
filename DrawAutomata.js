@@ -47,8 +47,6 @@ function addTransition(automataId) {
 
     var automata = defineAutomata();
 
-
-
     if(automata.type == "pda"){
         var transitionData = prompt("Define transition", "Origin,Input,Pop,Push,Next");
 
