@@ -71,7 +71,7 @@ function createPdaEdge(originState, input, pop, push, nextState, automata){
     var origin = getNode(originState, automata);
     var next = getNode(nextState, automata);
     var pushString = push.split("");
-    var tText = input + "," + pop + "/" +  push + "\n"; 
+    var tText = input + "," + pop + "/" +  push; 
     var newEdge = new PdaTransition(origin, input, pop, pushString, next, tText);
 
     if(origin != null && next != null){
@@ -96,8 +96,8 @@ function craftPdaEdge(newEdge, automata){
 }
 
 function compareEnds(edgeA, edgeB){
-    if( edgeA.origin.stateName == edgeB.origin.stateName)
-        if(edgeA.next.stateName == edgeB.next.stateName)
+    if( edgeA.from == edgeB.origin.stateId)
+        if(edgeA.to == edgeB.next.stateId)
             return true;
     
     return false;
@@ -123,28 +123,28 @@ function craftTuringEdge(originState, tape, newTape, direction, nextState, autom
 
 function addNewPdaEdge(newEdge, automata){
 
-    for(var i = 0; i < automata.edges.length; i++)
-    if(compareEnds(automata.edges[i], newEdge)){
-        if(automata.transitionList[i] != undefined){
-            console.log(automata.transitionList[i]);
-            var currentName = automata.edges.title.toString();
-            automata.transitionList[i].title = currentName + newEdge.tText;
-        }
+    if(automata.edges.length != 0){
+        for(var i = 0; i < automata.edges.length; i++)
+            if(compareEnds(automata.edges[i], newEdge))
+                automata.edges[i].title += '<br>' + newEdge.tText;
+            else
+                console.log("diferentes");  
+    }else{
+        console.log("wtf");
+        automata.edges.push({
+            id: newEdge.transitionId, 
+            from: newEdge.origin.stateId,
+            to: newEdge.next.stateId,
+            //label: 'lol\nfu', 
+            title: newEdge.tText,
+            color:{color:'rgba(30,30,30,0.2)', highlight:'blue'},
+            arrows:'to'         
+        });   
     }
 
-    automata.edges.push({
-        id: newEdge.transitionId, 
-        from: newEdge.origin.stateId,
-        to: newEdge.next.stateId,
-        //label: "",
-        title: newEdge.tText,
-        color:{color:'rgba(30,30,30,0.2)', highlight:'blue'},
-        arrows:'to'         
-    });
-
-
-
-
+    
+             
+            //
     //var lel = automata.edges[0].title.toString() + "lool"; 
     //automata.edges[0].title = lel;
 
