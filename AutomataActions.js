@@ -104,7 +104,6 @@ function transitionTable(automata){
 
         for(var m = 0; m < stateDataArray.length; m++){
             if(stateDataArray[m] != ""){
-                
                 newNode = getNode(stateDataArray[m], automata);
 
                 if(newNode.isInitial && newNode.accepted && (type == "F" || type == "I" || type == "N" ) && newNode.stateName == stateDataArray[0])
@@ -116,15 +115,9 @@ function transitionTable(automata){
             }
         }
         auxCreateState(newDfaAutomata, stateName, type, color);
-
     }
-    
-    console.log(stateCombinations);
 
     for(var n = 0; n < stateCombinations.length; n++){
-
-        console.log(stateCombinations[n]);
-
         var rawStatesArray = [];
         var combinedStates = [];
         rawStates = stateCombinations[n];
@@ -132,69 +125,41 @@ function transitionTable(automata){
 
         for(var o = 0; o < rawStates.length; o++){
             var nuState = getNode(rawStates[o], automata);
-            if(nuState != null){
+            if(nuState != null)
                 rawStatesArray.push(nuState);
-            }
         }
 
         for(var p = 0; p < alphabet.length; p++){
             var mergedNextStates = [];
             for(var q = 0; q < rawStatesArray.length; q++){
+
                 var nextStatesNames = "";
                 var nuNodes = getNode(rawStatesArray[q].stateName, newDfaAutomata);
-                
                 var ns = getNextStates(nuNodes, alphabet[p], automata.transitionList);
                 
                 for(var r = 0; r < ns.length; r++)
                     nextStatesNames +=  ns[r].stateName + ",";
 
                 var nonRepeat = nextStatesNames.split(",");
-
-
-
                 var stateName =  sortStateName(nextStatesNames);
                 var nuState = getNode(stateName, newDfaAutomata);
 
                 if(nuState != undefined)
                     mergedNextStates.push(nuState);
-    
             }
 
             var tempName = "";
 
-            for(var s = 0; s < mergedNextStates.length; s++){
+            for(var s = 0; s < mergedNextStates.length; s++)
                 tempName += mergedNextStates[s].stateName + "," ;
-            }
 
             tempName = sortStateName(tempName);
-
-
-            //var lol = tempName;
-            //var lel = removeDuplicate(lol);
-            //console.log(lel);
-
             var fuckingFinally = removeDuplicate(tempName);
-
-            console.log("next State");
             var trueNode = getNode(fuckingFinally, newDfaAutomata);
-
             var trueOriginNode =  getNode(sortStateName(stateCombinations[n]), newDfaAutomata);
 
-
-
-            console.log(trueOriginNode);
-            console.log(alphabet[p]);
-            console.log(trueNode);
-
-            if(trueOriginNode != undefined && trueNode != undefined){
+            if(trueOriginNode != undefined && trueNode != undefined)
                  auxCreateEdge(newDfaAutomata, alphabet[p], trueOriginNode.stateName,trueNode.stateName);
-            }
-
-           
-            //auxCreateEdge(automata, transitionChar, originState, nextState)
-            console.log("******************************");
-
-
         }
     }
 
@@ -236,21 +201,12 @@ function sortStateName(stateName){
 
 function removeDuplicate(stringArray){
     var data = stringArray.split(",");
-
     var unique = new Set(data);
-
     var unique2 = Array.from(unique);
-
     var auxUnique2 = unique2.join();
-
     var newUnique = sortStateArray(auxUnique2);
-    
-    console.log("fuck");
-    console.log(auxUnique2);
-
 
     return auxUnique2;
-
 }
 
 function mixStates(automata, automataA, automataB){
@@ -483,22 +439,6 @@ function chkTransitions(oldAutomata, automata){
 
         }
    }
-}
-
-function closure(states, transitionList){
-/*
-    var closuredStates = [];
-    closuredStates.push(state);
-
-    var next = getNextStates(state, "E", transitionList);
-
-    if(next != null)
-        for(var i = 0; i < next.length; i++)
-            closuredStates.push(next[i]);
-*/
-
-    
-
 }
 
 function clausura(fromStates, transitionList) {

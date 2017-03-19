@@ -6,6 +6,7 @@ var dfaAutomata = new Automata("dfa");
 var nfaAutomata = new Automata("nfa");
 var emptyA = new Automata("dfa");
 var turingAutomata = new Automata("turing");
+var pdaAutomata = new Automata("pda");
 
 var savedAutomata;
 
@@ -46,8 +47,26 @@ function addTransition(automataId) {
 
     var automata = defineAutomata();
 
-    if(automata.type != "turing"){
-        var transitionData = prompt("Define transition", "0,a,b");
+
+
+    if(automata.type == "pda"){
+        var transitionData = prompt("Define transition", "Origin,Input,Pop,Push,Next");
+
+        if(transitionData != null){
+            var dataArray = transitionData.split(",");
+            var origin = dataArray[0];
+            var input = dataArray[1];
+            var pop = dataArray[2];
+            var push = dataArray[3];
+            var next = dataArray[4];
+
+            createPdaEdge(origin, input,pop,push,next,automata);
+
+        }else
+            callSnackbar("Invalid input"); 
+    }
+    else if(automata.type != "turing"){
+        var transitionData = prompt("Define transition", "Char,Origin,Next");
 
         if(transitionData != null){
             var dataArray = transitionData.split(",");
@@ -56,6 +75,7 @@ function addTransition(automataId) {
             auxCreateEdge(automata, dataArray[0], originState, nextState, automataId);
         }else
             callSnackbar("Invalid input");  
+    
     }else{
         var transitionData = prompt("Defina transition", "Origin,Tape,New Tape,Direction,Next");
 
@@ -67,11 +87,9 @@ function addTransition(automataId) {
             var direction = dataArray[3];
             var nextState = dataArray[4]; 
             createTuringEdge(originState, currentTape, newTape, direction,nextState, automata);
-        }else
+        }
             callSnackbar("Invalid input");
     }
-    
-
 }
 
 function defineAutomata() {
@@ -80,6 +98,8 @@ function defineAutomata() {
         return dfaAutomata;
     else if(document.getElementsByName('automataR')[1].checked)
         return nfaAutomata;
+    else if(document.getElementsByName('automataR')[2].checked)
+        return pdaAutomata;
     else if(document.getElementsByName('automataR')[3].checked)
         return turingAutomata;
     else
@@ -93,14 +113,14 @@ function acceptString(testString, turingTape) {
 
     if(automata.type == "dfa")
         result =  evaluateDFA(testString,automata);
-    else if(automata.type == "nfa" && document.getElementById("NFAE").checked == true){
-        //result = evaluateNFAE(testString, automata);
-        result = evaluarNFAE(testString, automata);
-    }
+    else if(automata.type == "nfa" && document.getElementById("NFAE").checked == true)
+        result = evaluateNFAE(testString, automata);
     else if(automata.type == "nfa")
         result = evaluateNFA(testString, automata);
     else if(automata.type == "turing")
         result = evaluateTuring(testString, turingTape, automata);
+    else if(automata.type == "pda")
+        result = evaluatePda(testString, automata);
     
 
     if(result == true)
@@ -110,6 +130,10 @@ function acceptString(testString, turingTape) {
 
     if(automata.type == "turing")
         alert("Tape: " + result);
+}
+
+function evaluatePda(){
+
 }
 
 function convertNfaToDfa() {

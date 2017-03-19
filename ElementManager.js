@@ -67,6 +67,34 @@ function createTuringEdge(originState, tape, newTape, direction, nextState, auto
 
 }
 
+function createPDAEdge(originState, input, pop, push, nextState, automata){
+    var transitionId = (Math.random() * 1e7).toString(32);
+    var origin = getNode(originState, automata);
+    var next = getNode(nextState, automata);
+
+    if(origin != null && next != null){
+        if(!turingEdgeExists(originState, input, pop, push, nextState, automata))
+            craftPdaEdge(originState, input, pop, push, nextState, automata, transitionId);  
+        else
+            callSnackbar("Transition already exists.");
+    }else
+        alert("State does not exists");
+
+}
+
+function craftPdaEdge(originState, input, pop, push, nextState, automata, transitionId){
+    var newEdge;
+    var pushString = push.split("");
+    newEdge = new PdaTransition(originState, input, pop, pushString, nextState);
+
+    automata.transitionList.push(newEdge);
+
+    var transitionText = input + "," + pop + "/" + push;
+    addNewPdaEdge(automata, transitionId, originState, nextState, transitionText);
+    callSnackbar("Transition " + transitionText + "," + originState.stateName + ", " + nextState.stateName);
+
+}
+
 function craftTuringEdge(originState, tape, newTape, direction, nextState, automata, transitionId){
     var newEdge;
     newEdge = new TuringTransition(originState, tape, newTape, direction, nextState);
@@ -83,6 +111,29 @@ function craftTuringEdge(originState, tape, newTape, direction, nextState, autom
     addNewTuringEdge(automata, transitionId, originState, nextState, transitionText);
     callSnackbar("Transition " + transitionText + "," + originState.stateName + ", " + nextState.stateName);
 
+}
+
+function addNewPdaEdge(automata, transitionId, originState, nextState, transitionText){
+
+    var existingEdge;
+//originState, input, pop, pushString, nextState
+    for(var i = 0; i < automata.transitionList.length; i++){
+        existingEdge = getPdaEdge(originState, input, pop, pushString, nextState);
+    }
+
+    automata.edges.push({
+        id: transitionId, 
+        from: originState.stateId,
+        to: nextState.stateId,
+        label: "",
+        color:{color:'rgba(30,30,30,0.2)', highlight:'blue'},
+        arrows:'to'         
+    });
+
+    //var lel = automata.edges[0].title.toString() + "lool"; 
+    //automata.edges[0].title = lel;
+
+    init(automata);
 }
 
 function addNewTuringEdge(automata, transitionId, originState, nextState, transitionText){
@@ -105,6 +156,17 @@ function turingEdgeExists(origin, tape, newTape, direction, next, automata){
     for(var i = 0; i < automata.transitionList.length; i++)
         if(newEdge === automata.transitionList[i])
             return true;
+
+    return false;
+}
+
+function pdaEdgeExists(originState, input, pop, push, nextState, automata){
+
+    var newEdge = new PdaTransition(originState, input, pop, push, nextState);
+
+    for(var i = 0; i < automata.transitionList.length; i++)
+        if(newEdge === automata.transitionList[i])
+            return true
 
     return false;
 }
@@ -155,9 +217,12 @@ function addNewEdge(automata, transitionId, originState, nextState, transitionCh
         from: originState.stateId,
         to: nextState.stateId,
         label: transitionChar,
+        title: transitionChar,
+        font: {align: 'top'},
         color:{color:'rgba(30,30,30,0.2)', highlight:'blue'},
         arrows:'to'
     });
+
     init(automata);
 }
 
@@ -202,4 +267,14 @@ function getNode(nodeName, automata) {
     for(var i = 0; i< automata.stateList.length; i++)
         if(automata.stateList[i].stateName == nodeName)
             return automata.stateList[i];
+}
+
+function getPdaEdge(originState, input, pop, push, nextState, automata){
+    var edge = new PdaTransition(originState, input, pop, pushString, nextState);
+
+    for(var i = 0; i < automata.transitionList.length; i++)
+        if(edge == automata.transitionList[i])
+            return automata.transitionList[i];
+
+    return null;
 }

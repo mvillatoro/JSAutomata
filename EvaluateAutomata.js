@@ -87,7 +87,7 @@ function evaluateNFAE(testString, automata){
 
 }
 
-function evaluarNFAE(str, automata) {
+function evaluateNFAE(str, automata) {
     var current = getInitialNodes(automata.stateList);
     current = clausura(current, automata.transitionList);
 
@@ -155,6 +155,11 @@ function evaluateTuring(testString, turingTape, automata){
         newTuple = getNextTuringState(currentState, arrayTape[i], automata.transitionList);
         
         if(newTuple != undefined){
+            if(i == 0)
+                arrayTape.unshift("B");
+            if(i = turingTape.length)
+                arrayTape.push("B");
+
             arrayTape[i] = newTuple[0];
             currentState = newTuple[1];
 

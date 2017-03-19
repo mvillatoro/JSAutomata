@@ -13,6 +13,9 @@ a,I|b,N|c,F*a,a,b|b,E,c|c,b,c
 
 a,I|b,N|c,F*a,b,a|a,E,b|b,a,b|b,E,c|c,a,b|c,b,a
 
+//PDA
+
+
 //TURING
 a,I|b,N|c,N|h,F*a,0,P,R,b|a,1,P,L,c|b,1,P,R,b|b,0,P,L,a|c,0,P,L,b|c,1,P,R,h
 
