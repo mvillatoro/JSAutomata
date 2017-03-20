@@ -5,6 +5,8 @@
 
 a,I|b,F*a,0,b|a,1,a
 
+a,I|b,N|c,F|d,N|e,N|f,N|g,N|h,N*a,0,b|a,1,f|b,1,c|b,0,g|c,1,c|c,0,a|d,0,c|d,1,g|e,1,f|e,0,h|f,1,g|f,0,c|g,0,g|g,1,e|h,0,g|h,1,c
+
 //NFA
 a,I|b,N|c,N|d,N|e,F*a,0,a|a,0,b|a,0,c|a,0,d|a,0,e|a,1,d|a,1,e|b,0,c|b,1,e|c,1,b|d,0,e
 
@@ -14,7 +16,9 @@ a,I|b,N|c,F*a,a,b|b,E,c|c,b,c
 a,I|b,N|c,F*a,b,a|a,E,b|b,a,b|b,E,c|c,a,b|c,b,a
 
 //PDA
+a,I*a,0,0,11,a
 
+a,I|b,N|c,F*a,0,0,00,a|b,0,0,11,c|a,0,z,0z,a|a,1,0,E,b
 
 //TURING
 a,I|b,N|c,N|h,F*a,0,P,R,b|a,1,P,L,c|b,1,P,R,b|b,0,P,L,a|c,0,P,L,b|c,1,P,R,h
@@ -35,7 +39,7 @@ TURING
 NFAE
 
 PDA
-MINIMIZACION
+MIN	IMIZACION
 
 REGEX
 Automata -> REGEX

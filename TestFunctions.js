@@ -14,3 +14,8 @@ function auxPrintStates(automata) {
         console.log(automata.stateList[i]);
 
 }
+
+function printTransitions(automata){
+    for(var i = 0; i < automata.transitionList.length; i++)
+        console.log(automata.transitionList[i]);
+}

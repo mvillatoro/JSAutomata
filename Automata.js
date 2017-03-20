@@ -11,4 +11,5 @@ function Automata(type) {
     this.nodeIds = [];
     this.edges = [];
     this.type = type;
+    this.aStack = [];
 }

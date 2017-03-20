@@ -130,10 +130,6 @@ function acceptString(testString, turingTape) {
         alert("Tape: " + result);
 }
 
-function evaluatePda(){
-
-}
-
 function convertNfaToDfa() {
 
     auxNfa = nfaAutomata;
@@ -204,7 +200,12 @@ function load(aString){
             var edge = transitions[k].split(",");
             createTuringEdge(edge[0], edge[1], edge[2], edge[3], edge[4], nuAutomata);
         }   
-    else{
+    else if(nuAutomata.type == "pda"){
+        for(var l = 0; l < transitions.length; l++){
+            var edge = transitions[l].split(",");
+            createPdaEdge(edge[0],edge[1],edge[2],edge[3], edge[4], nuAutomata);
+        }
+    }else{
         for(var j = 0; j < transitions.length;j ++ ){
             var edge = transitions[j].split(",");
             auxCreateEdge(nuAutomata, edge[1], edge[0], edge[2]);
@@ -265,3 +266,17 @@ function makeCompliment(){
 
 }
 
+function printAllTransitions(){
+   var automata = defineAutomata();
+
+   printTransitions(automata);
+
+}
+
+function minimize(){
+
+    var automata = defineAutomata();
+
+    dfaAutomata =  makeMinimization(automata);
+
+}

@@ -458,3 +458,26 @@ function clausura(fromStates, transitionList) {
 
     return result;
 }
+
+function getTransitions(state, automata){
+
+    var transitionList = [];
+
+    for(var i = 0; i < automata.transitionList.length; i++)
+        if(automata.transitionList[i].origin == state)
+            transitionList.push(automata.transitionList[i]);
+
+    return transitionList;
+
+}
+
+function contains(transitionA, transitionsB){
+
+    for(var  i = 0; i < transitionsB.length; i++)
+        if(transitionA.transitionChar == transitionsB[i].transitionChar)
+            if(transitionA.nextState == transitionsB[i].nextState)
+                return true;
+
+    return false;
+
+}

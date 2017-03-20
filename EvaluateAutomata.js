@@ -44,49 +44,6 @@ function nfaToDfa(automata){
 
 }
 
-function evaluateNFAE(testString, automata){
-    
-    var currentList = [];
-    currentList = getInitialNodes(automata.stateList);
-
-    for(var  i = 0; i < testString.length; i++){
-        var tempList = [];
-        for(var j = 0; j < currentList.length; j++){
-            var states = getNextStates(currentList[j], testString.charAt(i), automata.transitionList);
-            
-            var closuredStates = [];
-
-            var nuNextStates = closure(states, automata.transitionList);
-
-
-            for(var n = 0; n < nuNextStates.length; n++){
-                closuredStates.push(nuNextStates[n]);
-                i--;       
-            }
-            
-            tempList.push.apply(tempList, closuredStates);
-        }
-
-        currentList.length = 0;
-
-
-
-        for(var l = 0; l < tempList.length; l++){
-            //console.log(tempList[l]);
-            currentList.push(tempList[l]);
-        }
-            
-            console.log(currentList);
-    }
-
-    for(var k = 0; k < currentList.length; k++)
-        if(currentList[k].accepted)
-            return true;
-
-    return false;
-
-}
-
 function evaluateNFAE(str, automata) {
     var current = getInitialNodes(automata.stateList);
     current = clausura(current, automata.transitionList);
@@ -106,9 +63,7 @@ function evaluateNFAE(str, automata) {
         }
 
         current =next;
-             
-
-
+            
         current = clausura(current, automata.transitionList);
     }
 
@@ -198,4 +153,87 @@ function doCompliment(automata){
     chkTransitions(automata, nuAutomata);
 
     return nuAutomata;
+}
+
+function makeMinimization(automata){
+
+    _buildEquivalenceTable(automata);
+
+}
+
+function _buildEquivalenceTable(automata) {
+        const equivalenceTable = {};
+
+        const states = new Map(automata.stateList);
+
+        const getEquivalenceSymbol = (xState, yState) => {
+
+            var transitionX = [];
+            var transitionY = [];
+
+            for(var i = 0; i < automata.transitionList.length; i++){
+                if(automata.transitionList[i].originState.stateName == xState)
+                    transitionX.push(automata.transitionList[i]);
+                else if (automata.transitionList[i].originState.stateName == yState)
+                    transitionY.push(automata.transitionList[i]);
+            }
+
+            console.log(transitionX);
+            console.log(transitionY);
+
+            if(transitionX.length != transitionY.length){
+                return "x";
+            }
+
+            for(x of transitionX){
+                if(!contains(x, transitionY)) return "x";
+
+                console.log(transitionY.nextState.stateName);
+
+                if(x.nextState != transitionY.nextState){
+                    if(equivalenceTable[x.stateName][transitionY.nextState.stateName] == "x") return "x";
+                    else if(equivalenceTable[x.stateName][transitionY.nextState.stateName] == " ") return " ";
+                }
+            }
+
+            return "o";
+        };
+
+    for (x of automata.stateList) {
+        equivalenceTable[x.stateName] = {};
+        for (y of automata.stateList) {     
+            if (x.accepted || y.accepted) {
+                equivalenceTable[x.stateName][y.stateName] = "x";
+            } else {
+                equivalenceTable[x.stateName][y.stateName] = " ";    
+            }
+        }
+    }
+
+    while (hasEmptySpace(equivalenceTable, automata)) {
+        for (x of automata.stateList) {
+            for (y of automata.stateList) {
+                if (equivalenceTable[x.stateName][y.stateName] !== " ") continue;
+
+                equivalenceTable[x.stateName][y.stateName] = getEquivalenceSymbol(x.stateName, y.stateName);
+            }
+        }
+    }
+
+    console.log(equivalenceTable);
+
+}
+
+function hasEmptySpace(equivalenceTable, automata){
+
+    for(x of automata.stateList){
+        for(y of automata.stateList){
+            if(equivalenceTable[x.stateName][y.stateName] === " "){
+                return true;
+            }
+        }
+    }
+
+    return false;
+
 }

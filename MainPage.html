@@ -78,12 +78,13 @@
     <button onclick="load(document.getElementById('automataString').value)" >Load Automata</button><br><br>
 
     <button onclick="addTransition('automataDiagram')" >Add transition</button><br><br>
-    <input  type="radio" id="automataR" name="automataR" value="DFA" >DFA<br>
+    <input  type="radio" id="automataR" name="automataR" value="DFA" checked="checked"  >DFA<br>
 
     <div id = "nfaDiv">
         &emsp;&emsp;<button onclick="makeUnion()" >Union</button><br>
         &emsp;&emsp;<button onclick="makeIntersection()" >Intersection</button><br>
         &emsp;&emsp;<button onclick="makeCompliment()" >Comliment</button><br>
+        &emsp;&emsp;<button onclick="minimize()" >Minimize</button><br>
     </div>
 
 
@@ -94,7 +95,7 @@
         &emsp;&emsp;<button  onclick="convertNfaToDfa()"  >NFA -> DFA</button><br>
     </div>
 
-    <input type="radio" id="automataR" name="automataR" value="PDA"   checked="checked" >PDA<br>
+    <input type="radio" id="automataR" name="automataR" value="PDA">PDA<br>
     <input type="radio" id="automataR" name="automataR" value="TURING">TURING<br>
 
     <div id = "tape" style="display: none">
@@ -104,6 +105,7 @@
     <button onclick="saveAutomata()" >Save Automata</button><br>
     <button onclick="loadAutomata()" >Load Automata</button><br>
     <button onclick="clearDiagram()" >Clear</button><br><br>
+    <button onclick="printAllTransitions()" >Print Transitions</button><br><br>
 
     <input id="testString" type="text">
     <button onclick="acceptString(document.getElementById('testString').value, document.getElementById('turingTape').value)" >Test string</button><br>

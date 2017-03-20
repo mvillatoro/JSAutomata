@@ -123,30 +123,14 @@ function craftTuringEdge(originState, tape, newTape, direction, nextState, autom
 
 function addNewPdaEdge(newEdge, automata){
 
-    if(automata.edges.length != 0){
-        for(var i = 0; i < automata.edges.length; i++)
-            if(compareEnds(automata.edges[i], newEdge))
-                automata.edges[i].title += '<br>' + newEdge.tText;
-            else
-                console.log("diferentes");  
-    }else{
-        console.log("wtf");
-        automata.edges.push({
-            id: newEdge.transitionId, 
-            from: newEdge.origin.stateId,
-            to: newEdge.next.stateId,
-            //label: 'lol\nfu', 
-            title: newEdge.tText,
-            color:{color:'rgba(30,30,30,0.2)', highlight:'blue'},
-            arrows:'to'         
-        });   
-    }
-
-    
-             
-            //
-    //var lel = automata.edges[0].title.toString() + "lool"; 
-    //automata.edges[0].title = lel;
+    automata.edges.push({
+        id: newEdge.transitionId, 
+        from: newEdge.origin.stateId,
+        to: newEdge.next.stateId,
+        title: newEdge.tText,
+        color:{color:'rgba(30,30,30,0.2)', highlight:'blue'},
+        arrows:'to'         
+        });
 
     init(automata);
 }
@@ -293,7 +277,7 @@ function getPdaEdge(newEdge, automata){
     return null;
 }
 
-function comparePdaEdges(edgeA, edgeB){
+function comparePdaEdges(edgeA, edgeB){ 
     if(edgeA.origin.stateName == edgeB.origin.stateName)
         if(edgeA.input == edgeB.input)
             if(edgeA.pop == edgeB.pop)
@@ -308,11 +292,12 @@ function comparePdaEdges(edgeA, edgeB){
 
 function compareArrays(array1, array2){
 
+    if(array1.length != array2.length)
+        return false;
+
     for(var i = 0; i < array1.length; i++)
-        for(var j = 0; j < array2.length; j++)
-            if(array1[i] != array2[j])
-                return false;
+            if(array1[i] != array2[i])
+                return false;   
 
     return true;
-
 }
